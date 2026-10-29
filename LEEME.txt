@@ -1,0 +1,23 @@
+TEST PL-400 - VERSION WEB (PARA MOVIL Y SIN CONEXION)
+
+Esta carpeta es una web estatica: no necesita servidor propio ni Node.
+
+PUBLICAR (una vez, lo hace una sola persona)
+- GitHub Pages: sube el contenido de esta carpeta a un repositorio, y en
+  Settings > Pages elige la rama y la carpeta raiz.
+- Netlify / Cloudflare Pages / Vercel: arrastra la carpeta y te dan una URL https.
+- Cualquier hosting estatico con HTTPS sirve. El modo sin conexion necesita HTTPS.
+
+USO EN EL MOVIL
+1. Abre la URL con wifi la primera vez: se descargan unos 13 MB (preguntas e imagenes)
+   para poder usarlo despues sin cobertura.
+2. Anadir a la pantalla de inicio:
+   - Android (Chrome): menu de tres puntos > Instalar aplicacion.
+   - iPhone (Safari): boton Compartir > Anadir a pantalla de inicio.
+3. Desde ese momento funciona sin conexion. Cuando publiques una version nueva, se
+   actualiza sola la siguiente vez que se abra con conexion.
+
+HISTORIAL
+- Cada dispositivo guarda su propio historial en el navegador.
+- Para pasarlo de un dispositivo a otro: Historial > Exportar / importar > Copiar
+  JSON, y en el otro dispositivo Importar texto pegado.
