@@ -1,0 +1,1828 @@
+{
+  "version": "2.0",
+  "exam": "C",
+  "questions": [
+    {
+      "exam": "C",
+      "n": 1,
+      "stem": [
+        {
+          "t": "You are testing security in a model-driven app. The business unit structure in the environment consists of a top-level business unit with three business units, named BusA, BusB, and BusC, directly under it."
+        },
+        {
+          "t": "BusA users must be able to view records in only their business unit."
+        },
+        {
+          "t": "You observe that BusA users have security roles from BusB and BusC assigned to them. The BusA users can view records in those business units."
+        },
+        {
+          "t": "All security role privileges are set to the Business Unit level."
+        },
+        {
+          "t": "You need to correct the problem with record access."
+        },
+        {
+          "t": "Which two actions should you perform? Each correct answer presents part of the solution."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Turn off the feature that controls record ownership across business units"
+        },
+        {
+          "k": "B",
+          "t": "Create a security role for BusA users in the parent business unit with privileges set to Business Unit level"
+        },
+        {
+          "k": "C",
+          "t": "Move BusA users to the parent business unit. Assign security roles with Parent Child Business Units privileges"
+        },
+        {
+          "k": "D",
+          "t": "Ensure security role privileges are set to User level."
+        }
+      ],
+      "ans": "AD",
+      "multi": true,
+      "id": "v2-C-1",
+      "sourceId": "C-1",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 2,
+      "stem": [
+        {
+          "t": "HOTSPOT You are creating a canvas app for users to interact with contact data in Microsoft Dataverse."
+        },
+        {
+          "t": "When users display contact data in the app, the following requirements must be met: • By default, all contact data must be displayed, unless data is entered into a text input control; if so, then data must be filtered based on the last name of the contact. • A new column must be added when retrieving the data source. The column must combine the Salutation and Full Name columns into a new column named Full Salutation. • All data must be sorted in alphabetical order based on the surname of the contact."
+        },
+        {
+          "t": "You need to finalize the Microsoft Power Fx formula."
+        },
+        {
+          "t": "How should you complete the code segment? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-2",
+      "kind": "interactive",
+      "sourceId": "C-2",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "formula-function",
+            "label": "Choose the first function.",
+            "answer": "sortbycolumns",
+            "options": [
+              {
+                "id": "sort",
+                "text": "Sort"
+              },
+              {
+                "id": "sortbycolumns",
+                "text": "SortByColumns"
+              },
+              {
+                "id": "filter",
+                "text": "Filter"
+              },
+              {
+                "id": "showcolumns",
+                "text": "ShowColumns"
+              }
+            ]
+          },
+          {
+            "id": "formula-inner-function",
+            "label": "Choose the second function.",
+            "answer": "addcolumns",
+            "options": [
+              {
+                "id": "addcolumns",
+                "text": "AddColumns"
+              },
+              {
+                "id": "showcolumns",
+                "text": "ShowColumns"
+              },
+              {
+                "id": "filter",
+                "text": "Filter"
+              },
+              {
+                "id": "search",
+                "text": "Search"
+              }
+            ]
+          },
+          {
+            "id": "formula-search-function",
+            "label": "Choose the third function.",
+            "answer": "search",
+            "options": [
+              {
+                "id": "sort",
+                "text": "Sort"
+              },
+              {
+                "id": "filter",
+                "text": "Filter"
+              },
+              {
+                "id": "search",
+                "text": "Search"
+              },
+              {
+                "id": "showcolumns",
+                "text": "ShowColumns"
+              }
+            ]
+          },
+          {
+            "id": "formula-name-function",
+            "label": "Choose the fourth function.",
+            "answer": "concatenate",
+            "options": [
+              {
+                "id": "concatenate",
+                "text": "Concatenate"
+              },
+              {
+                "id": "concat",
+                "text": "Concat"
+              },
+              {
+                "id": "coalesce",
+                "text": "Coalesce"
+              },
+              {
+                "id": "select",
+                "text": "Select"
+              }
+            ]
+          },
+          {
+            "id": "formula-name-column",
+            "label": "Column used for sorting",
+            "answer": "last-name",
+            "options": [
+              {
+                "id": "firstname",
+                "text": "\"firstname\""
+              },
+              {
+                "id": "lastname",
+                "text": "\"lastname\""
+              },
+              {
+                "id": "fullname",
+                "text": "\"fullname\""
+              },
+              {
+                "id": "last-name",
+                "text": "'Last Name'"
+              }
+            ]
+          }
+        ],
+        "layout": "code",
+        "code": [
+          {
+            "text": "SortByColumns(\n    "
+          },
+          {
+            "row": "formula-function"
+          },
+          {
+            "text": "(\n        "
+          },
+          {
+            "row": "formula-inner-function"
+          },
+          {
+            "text": "(\n            "
+          },
+          {
+            "row": "formula-search-function"
+          },
+          {
+            "text": "(Contacts, TextInput1.Text, 'Last Name'),\n            'Full Salutation',\n            "
+          },
+          {
+            "row": "formula-name-function"
+          },
+          {
+            "text": "(Salutation, ' ', FullName)\n        ),\n        "
+          },
+          {
+            "row": "formula-name-column"
+          },
+          {
+            "text": ",\n    SortOrder.Ascending, \"createdon\", SortOrder.Descending\n)"
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 3,
+      "stem": [
+        {
+          "t": "You are developing a canvas app that connects to Microsoft Dataverse. You add the Accounts table as a data source to the app. You implement a gallery that will display information from the Accounts table."
+        },
+        {
+          "t": "The Accounts table is stored and cached locally as a collection named collAccounts. Data in the gallery must always display accounts that have a name value. The gallery uses the following Power Fx formula:"
+        },
+        {
+          "t": "Filter( Sort( collAccounts, 'Account Name', SortOrder.Descending ), IsBlank('Account Name') = false )"
+        },
+        {
+          "t": "You deploy the app to production."
+        },
+        {
+          "t": "Users report that the expected number of Account rows in the app does not appear."
+        },
+        {
+          "t": "You need to resolve the user issue."
+        },
+        {
+          "t": "How should you modify the Power Fx formula?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Sort(Accounts, 'Account Name', SortOrder.Descending)"
+        },
+        {
+          "k": "B",
+          "t": "Sort(collAccounts, 'Account Name', SortOrder.Descending)"
+        },
+        {
+          "k": "C",
+          "t": "Filter(Sort(Accounts, 'Account Name', SortOrder.Descending), IsBlank('Account Name') = false)"
+        },
+        {
+          "k": "D",
+          "t": "collAccounts"
+        }
+      ],
+      "ans": "C",
+      "multi": false,
+      "id": "v2-C-3",
+      "sourceId": "C-3",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 4,
+      "stem": [
+        {
+          "t": "HOTSPOT You are building a canvas app for a company to display data from a Microsoft SharePoint list named Tasks. The list stores project tasks, including due dates."
+        },
+        {
+          "t": "A collection named projectTasks is already declared in the app."
+        },
+        {
+          "t": "The company maintains over 100,000 tasks across projects"
+        },
+        {
+          "t": "When users navigate to the main screen of the app or manually refresh the list, the main screen must display a list of all tasks that are beyond their due date."
+        },
+        {
+          "t": "Outbound network calls to SharePoint must be minimized."
+        },
+        {
+          "t": "You need to implement the functionality."
+        },
+        {
+          "t": "Which Power Fx formula should you use? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-4",
+      "kind": "interactive",
+      "sourceId": "C-4",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "collection-function",
+            "label": "Choose the collection function.",
+            "answer": "clearcollect",
+            "options": [
+              {
+                "id": "clearcollect",
+                "text": "ClearCollect"
+              },
+              {
+                "id": "collect",
+                "text": "Collect"
+              },
+              {
+                "id": "filter",
+                "text": "Filter"
+              },
+              {
+                "id": "search",
+                "text": "Search"
+              }
+            ]
+          },
+          {
+            "id": "collection-name",
+            "label": "Choose the collection name.",
+            "answer": "projecttasks",
+            "options": [
+              {
+                "id": "projecttasks",
+                "text": "projectTasks"
+              },
+              {
+                "id": "tasks",
+                "text": "Tasks"
+              }
+            ]
+          },
+          {
+            "id": "due-date-filter",
+            "label": "Choose the due-date filter.",
+            "answer": "filter-tasks-due-date-before-now",
+            "options": [
+              {
+                "id": "filter-tasks-due-date-after-now",
+                "text": "Filter(Tasks, 'DueDate' > Now())"
+              },
+              {
+                "id": "filter-tasks-due-date-before-now",
+                "text": "Filter(Tasks, 'DueDate' < Now())"
+              },
+              {
+                "id": "search-tasks-text-now-due-date",
+                "text": "Search(Tasks, Text(Now()), \"Due Date\")"
+              }
+            ]
+          }
+        ],
+        "layout": "code",
+        "code": [
+          {
+            "row": "collection-function"
+          },
+          {
+            "text": "("
+          },
+          {
+            "row": "collection-name"
+          },
+          {
+            "text": ", "
+          },
+          {
+            "row": "due-date-filter"
+          },
+          {
+            "text": ")"
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 5,
+      "stem": [
+        {
+          "t": "HOTSPOT You are implementing security features for a Dataverse plug-in that you created. The plug-in creates a Note whenever a user updates an Account row in Dataverse."
+        },
+        {
+          "t": "The plug-in has the following security requirements: • Users must have edit-only restrictions for existing accounts that are not their own. • The plug-in must always trigger successfully. • All necessary privileges must be assigned to users within an existing Microsoft Teams site. • The principle of least privilege must always be followed."
+        },
+        {
+          "t": "You need to implement the security features."
+        },
+        {
+          "t": "Which features should you implement? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-5",
+      "kind": "interactive",
+      "sourceId": "C-5",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "hierarchy-relationship",
+            "label": "Visualize records as a hierarchy in a model-driven app.",
+            "answer": "self-referential-relationship",
+            "options": [
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              }
+            ]
+          },
+          {
+            "id": "single-related-record",
+            "label": "Records in one entity must be able to reference only a single record in another entity.",
+            "answer": "one-to-many-relationship",
+            "options": [
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              }
+            ]
+          },
+          {
+            "id": "multiple-related-records",
+            "label": "Any record in one entity must be able to be referenced by any record in another entity.",
+            "answer": "many-to-many-relationship",
+            "options": [
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 6,
+      "stem": [
+        {
+          "t": "DRAG DROP A company manages IoT sensors that transmit temperature, humidity, and other data points every second."
+        },
+        {
+          "t": "You must store the data in Dataverse."
+        },
+        {
+          "t": "Users will view the data in a model-driven app."
+        },
+        {
+          "t": "You need to determine where to store the IoT data and the sensor device configuration."
+        },
+        {
+          "t": "Which Dataverse table types should you use? To answer, move the appropriate Dataverse table types to the correct data. You may use each table type once, more than once, or not at all. You may need to move the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-6",
+      "kind": "interactive",
+      "sourceId": "C-6",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "sensor-iot-data",
+            "label": "Sensor IoT data.",
+            "answer": "elastic",
+            "options": [
+              {
+                "id": "standard",
+                "text": "Standard"
+              },
+              {
+                "id": "elastic",
+                "text": "Elastic"
+              },
+              {
+                "id": "virtual",
+                "text": "Virtual"
+              }
+            ]
+          },
+          {
+            "id": "sensor-device-configuration",
+            "label": "Sensor device configuration.",
+            "answer": "standard",
+            "options": [
+              {
+                "id": "standard",
+                "text": "Standard"
+              },
+              {
+                "id": "elastic",
+                "text": "Elastic"
+              },
+              {
+                "id": "virtual",
+                "text": "Virtual"
+              }
+            ]
+          }
+        ],
+        "reuse": "once"
+      }
+    },
+    {
+      "exam": "C",
+      "n": 7,
+      "stem": [
+        {
+          "t": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals. Some question sets might have more than once correct solution, while others might not have a correct solution."
+        },
+        {
+          "t": "After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen."
+        },
+        {
+          "t": "A university implements Dynamics 365 Sales. Several departments use opportunity records to bid for funding for projects within their own departments. You configure the system to ensure that each department can only work on their own records."
+        },
+        {
+          "t": "Employees in multiple departments often need to work together on an opportunity. Employees report that they are not able to see opportunities from other departments."
+        },
+        {
+          "t": "You need to ensure that employees from more than one department can work on the same opportunities when necessary."
+        },
+        {
+          "t": "Solution: Use position hierarchy security and define the two departments as positions."
+        },
+        {
+          "t": "Does the solution meet the goal?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Yes"
+        },
+        {
+          "k": "B",
+          "t": "No"
+        }
+      ],
+      "ans": "B",
+      "multi": false,
+      "id": "v2-C-7",
+      "sourceId": "C-7",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 8,
+      "stem": [
+        {
+          "t": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals. Some question sets might have more than once correct solution, while others might not have a correct solution."
+        },
+        {
+          "t": "After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen."
+        },
+        {
+          "t": "A university implements Dynamics 365 Sales. Several departments use opportunity records to bid for funding for projects within their own departments. You configure the system to ensure that each department can only work on their own records."
+        },
+        {
+          "t": "Employees in multiple departments often need to work together on an opportunity. Employees report that they are not able to see opportunities from other departments."
+        },
+        {
+          "t": "You need to ensure that employees from more than one department can work on the same opportunities when necessary."
+        },
+        {
+          "t": "Solution: Create a security role that has organization-level access to opportunities."
+        },
+        {
+          "t": "Give this security role to all members of the two departments who need access."
+        },
+        {
+          "t": "Does the solution meet the goal?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Yes"
+        },
+        {
+          "k": "B",
+          "t": "No"
+        }
+      ],
+      "ans": "B",
+      "multi": false,
+      "id": "v2-C-8",
+      "sourceId": "C-8",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 9,
+      "stem": [
+        {
+          "t": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals. Some question sets might have more than once correct solution, while others might not have a correct solution."
+        },
+        {
+          "t": "After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen."
+        },
+        {
+          "t": "A university implements Dynamics 365 Sales. Several departments use opportunity records to bid for funding for projects within their own departments. You configure the system to ensure that each department can only work on their own records."
+        },
+        {
+          "t": "Employees in multiple departments often need to work together on an opportunity. Employees report that they are not able to see opportunities from other departments."
+        },
+        {
+          "t": "You need to ensure that employees from more than one department can work on the same opportunities when necessary."
+        },
+        {
+          "t": "Solution: Use access team templates and give access to members in the two departments."
+        },
+        {
+          "t": "Does the solution meet the goal?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Yes"
+        },
+        {
+          "k": "B",
+          "t": "No"
+        }
+      ],
+      "ans": "A",
+      "multi": false,
+      "id": "v2-C-9",
+      "sourceId": "C-9",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 10,
+      "stem": [
+        {
+          "t": "DRAG DROP - An international organization has a series of client-server applications that manage red light cameras and traffic violations across a wide geographic region. The daily volume of traffic violations is very high and growing."
+        },
+        {
+          "t": "You plan to use Microsoft Power Platform apps to manage the following types of data: ✑ Existing vehicle licensing data must be imported into Microsoft Dataverse and easily queried. ✑ Red light camera images must be stored in a repository for later analysis. ✑ Information about traffic violations must be stored and related to vehicle details."
+        },
+        {
+          "t": "You need to select data storage mechanisms for the new apps."
+        },
+        {
+          "t": "Which data storage mechanisms should you use? To answer, drag the appropriate data storage mechanisms to the correct data types. Each"
+        },
+        {
+          "t": "storage mechanism may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        },
+        {
+          "t": "Select and Place:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-10",
+      "kind": "interactive",
+      "sourceId": "C-10",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "vehicle-licensing",
+            "label": "Vehicle licensing data.",
+            "answer": "entity",
+            "options": [
+              {
+                "id": "entity",
+                "text": "Entity"
+              },
+              {
+                "id": "azure-storage-blob",
+                "text": "Azure Storage Blob"
+              },
+              {
+                "id": "azure-cosmos-db",
+                "text": "Azure Cosmos DB"
+              }
+            ]
+          },
+          {
+            "id": "camera-photos",
+            "label": "Red light camera photos.",
+            "answer": "azure-storage-blob",
+            "options": [
+              {
+                "id": "entity",
+                "text": "Entity"
+              },
+              {
+                "id": "azure-storage-blob",
+                "text": "Azure Storage Blob"
+              },
+              {
+                "id": "azure-cosmos-db",
+                "text": "Azure Cosmos DB"
+              }
+            ]
+          },
+          {
+            "id": "traffic-violations",
+            "label": "Information about traffic violations.",
+            "answer": "azure-cosmos-db",
+            "options": [
+              {
+                "id": "entity",
+                "text": "Entity"
+              },
+              {
+                "id": "azure-storage-blob",
+                "text": "Azure Storage Blob"
+              },
+              {
+                "id": "azure-cosmos-db",
+                "text": "Azure Cosmos DB"
+              }
+            ]
+          }
+        ],
+        "reuse": "multiple"
+      }
+    },
+    {
+      "exam": "C",
+      "n": 11,
+      "stem": [
+        {
+          "t": "A financial institution that has a Dynamics 365 Sales environment requires that the account balance field from the account entity be visible to specific users only."
+        },
+        {
+          "t": "You need to set up the field security for the account balance field."
+        },
+        {
+          "t": "Which three actions should you perform? Each correct answer presents part of the solution."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. ¡"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Set the field to Read-Only and then publish the entity"
+        },
+        {
+          "k": "B",
+          "t": "Set the field permission Allow Read to Yes and add the users to the members section."
+        },
+        {
+          "k": "C",
+          "t": "Create a security role and add the specific users to the role"
+        },
+        {
+          "k": "D",
+          "t": "Enable field security and then publish the entity"
+        },
+        {
+          "k": "E",
+          "t": "Create a field security profile."
+        }
+      ],
+      "ans": "BDE",
+      "multi": true,
+      "id": "v2-C-11",
+      "sourceId": "C-11",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 12,
+      "stem": [
+        {
+          "t": "HOTSPOT - An organization uses Common Data Service."
+        },
+        {
+          "t": "The organization's IT helpdesk requires a single-page web application to monitor and manage Data Export Service."
+        },
+        {
+          "t": "The app must access Data"
+        },
+        {
+          "t": "Export Service securely. The app must also permit helpdesk users to perform a limited set of functions."
+        },
+        {
+          "t": "You need to create a single-page app."
+        },
+        {
+          "t": "Which options should you use? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-12",
+      "kind": "interactive",
+      "sourceId": "C-12",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "connect-securely",
+            "label": "Connect to the app securely.",
+            "answer": "register-the-app-in-azure-active-directory",
+            "options": [
+              {
+                "id": "use-the-common-data-service-user-security-role",
+                "text": "Use the Common Data Service user security role"
+              },
+              {
+                "id": "use-the-sign-in-credentials-for-azure-sql-server",
+                "text": "Use the sign-in credentials for Azure SQL Server"
+              },
+              {
+                "id": "use-the-environment-maker-security-role",
+                "text": "Use the Environment Maker security role"
+              },
+              {
+                "id": "register-the-app-in-azure-active-directory",
+                "text": "Register the app in Azure Active Directory"
+              }
+            ]
+          },
+          {
+            "id": "replication-status",
+            "label": "Monitor the status of data replication.",
+            "answer": "use-profile-operations",
+            "options": [
+              {
+                "id": "use-fetchxml-queries",
+                "text": "Use FetchXML queries"
+              },
+              {
+                "id": "use-profile-operations",
+                "text": "Use Profile operations"
+              },
+              {
+                "id": "use-metadata-operations",
+                "text": "Use Metadata operations"
+              },
+              {
+                "id": "use-t-sql-queries",
+                "text": "Use T-SQL queries"
+              }
+            ]
+          },
+          {
+            "id": "enable-replication",
+            "label": "Enable an entity for replication.",
+            "answer": "enable-change-tracking",
+            "options": [
+              {
+                "id": "define-an-alternate-key",
+                "text": "Define an alternate key"
+              },
+              {
+                "id": "enable-auditing",
+                "text": "Enable Auditing"
+              },
+              {
+                "id": "enable-change-tracking",
+                "text": "Enable Change Tracking"
+              },
+              {
+                "id": "set-the-data-provider",
+                "text": "Set the data provider"
+              }
+            ]
+          },
+          {
+            "id": "control-replication",
+            "label": "Start or stop data replication.",
+            "answer": "crm-exporter-profiles-id-activatedata",
+            "options": [
+              {
+                "id": "crm-exporter-metadata-entities",
+                "text": "/crm/exporter/metadata/entities"
+              },
+              {
+                "id": "crm-exporter-profiles-validate",
+                "text": "/crm/exporter/profiles/validate"
+              },
+              {
+                "id": "crm-exporter-profiles-id-test",
+                "text": "/crm/exporter/profiles/{id}/test"
+              },
+              {
+                "id": "crm-exporter-profiles-id-activatedata",
+                "text": "/crm/exporter/profiles/{id}/activatedata"
+              }
+            ]
+          },
+          {
+            "id": "failed-sync-records",
+            "label": "View information on records that fail to sync.",
+            "answer": "use-azure-storage-explorer",
+            "options": [
+              {
+                "id": "use-azure-storage-explorer",
+                "text": "Use Azure Storage Explorer"
+              },
+              {
+                "id": "use-fetchxml-queries",
+                "text": "Use FetchXML queries"
+              },
+              {
+                "id": "use-profile-operations",
+                "text": "Use Profile operations"
+              },
+              {
+                "id": "use-t-sql-queries",
+                "text": "Use T-SQL queries"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 13,
+      "stem": [
+        {
+          "t": "HOTSPOT - A company has a Common Data Service (CDS) environment."
+        },
+        {
+          "t": "The following conditions must apply when accounts are reassigned: ✑ Ownership for completed tasks that are associated with the account must not change. ✑ Outstanding tasks must be reassigned to the new owner of the account."
+        },
+        {
+          "t": "You need to configure the relationship to meet the requirements."
+        },
+        {
+          "t": "Which settings should you use? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-13",
+      "kind": "interactive",
+      "sourceId": "C-13",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "relationship-behavior",
+            "label": "Relationship Behavior type.",
+            "answer": "configurable-cascading",
+            "options": [
+              {
+                "id": "referential",
+                "text": "Referential"
+              },
+              {
+                "id": "referential-restrict-delete",
+                "text": "Referential, Restrict Delete"
+              },
+              {
+                "id": "parental",
+                "text": "Parental"
+              },
+              {
+                "id": "configurable-cascading",
+                "text": "Configurable Cascading"
+              }
+            ]
+          },
+          {
+            "id": "assigned-action-behavior",
+            "label": "Behavior for the assigned action.",
+            "answer": "cascade-active",
+            "options": [
+              {
+                "id": "cascade-none",
+                "text": "Cascade None"
+              },
+              {
+                "id": "cascade-all",
+                "text": "Cascade All"
+              },
+              {
+                "id": "cascade-active",
+                "text": "Cascade Active"
+              },
+              {
+                "id": "cascade-user-owned",
+                "text": "Cascade User-Owned"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 14,
+      "stem": [
+        {
+          "t": "DRAG DROP - A company has Common Data Service (CDS) environments for development, test, and production."
+        },
+        {
+          "t": "You have a model-driven app that consists of two solutions. The solutions include settings and reference data. You plan to move the solutions, app settings, and reference data from a development environment to a production environment."
+        },
+        {
+          "t": "You export each solution from the development environment as a zip file."
+        },
+        {
+          "t": "You run the Configuration Manager to export the settings and reference data as zip files."
+        },
+        {
+          "t": "You need to prepare the app and its settings for deployment."
+        },
+        {
+          "t": "Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order."
+        },
+        {
+          "t": "NOTE: More than one order of answer choices is correct. You will receive credit for any of the correct orders you select."
+        },
+        {
+          "t": "Select and Place:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-14",
+      "kind": "interactive",
+      "sourceId": "C-14",
+      "version": "2.0",
+      "interaction": {
+        "type": "order",
+        "rows": [
+          {
+            "id": "step-1",
+            "label": "Step 1",
+            "answer": "create-a-dynamics-365-package-project-in-visual-studio",
+            "options": [
+              {
+                "id": "add-solution-and-data-files-to-the-pkgfolder-in-the-project",
+                "text": "Add solution and data files to the PkgFolder in the project"
+              },
+              {
+                "id": "build-the-package",
+                "text": "Build the package"
+              },
+              {
+                "id": "run-the-package-deployer-tool",
+                "text": "Run the Package Deployer tool"
+              },
+              {
+                "id": "define-the-solution-and-data-files-in-importconfig-xml",
+                "text": "Define the solution and data files in ImportConfig.xml"
+              },
+              {
+                "id": "run-the-solution-packager-tool",
+                "text": "Run the Solution Packager tool"
+              },
+              {
+                "id": "create-a-dynamics-365-package-project-in-visual-studio",
+                "text": "Create a Dynamics 365 Package project in Visual Studio"
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "label": "Step 2",
+            "answer": "add-solution-and-data-files-to-the-pkgfolder-in-the-project",
+            "options": [
+              {
+                "id": "add-solution-and-data-files-to-the-pkgfolder-in-the-project",
+                "text": "Add solution and data files to the PkgFolder in the project"
+              },
+              {
+                "id": "build-the-package",
+                "text": "Build the package"
+              },
+              {
+                "id": "run-the-package-deployer-tool",
+                "text": "Run the Package Deployer tool"
+              },
+              {
+                "id": "define-the-solution-and-data-files-in-importconfig-xml",
+                "text": "Define the solution and data files in ImportConfig.xml"
+              },
+              {
+                "id": "run-the-solution-packager-tool",
+                "text": "Run the Solution Packager tool"
+              },
+              {
+                "id": "create-a-dynamics-365-package-project-in-visual-studio",
+                "text": "Create a Dynamics 365 Package project in Visual Studio"
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "label": "Step 3",
+            "answer": "build-the-package",
+            "options": [
+              {
+                "id": "add-solution-and-data-files-to-the-pkgfolder-in-the-project",
+                "text": "Add solution and data files to the PkgFolder in the project"
+              },
+              {
+                "id": "build-the-package",
+                "text": "Build the package"
+              },
+              {
+                "id": "run-the-package-deployer-tool",
+                "text": "Run the Package Deployer tool"
+              },
+              {
+                "id": "define-the-solution-and-data-files-in-importconfig-xml",
+                "text": "Define the solution and data files in ImportConfig.xml"
+              },
+              {
+                "id": "run-the-solution-packager-tool",
+                "text": "Run the Solution Packager tool"
+              },
+              {
+                "id": "create-a-dynamics-365-package-project-in-visual-studio",
+                "text": "Create a Dynamics 365 Package project in Visual Studio"
+              }
+            ]
+          },
+          {
+            "id": "step-4",
+            "label": "Step 4",
+            "answer": "run-the-package-deployer-tool",
+            "options": [
+              {
+                "id": "add-solution-and-data-files-to-the-pkgfolder-in-the-project",
+                "text": "Add solution and data files to the PkgFolder in the project"
+              },
+              {
+                "id": "build-the-package",
+                "text": "Build the package"
+              },
+              {
+                "id": "run-the-package-deployer-tool",
+                "text": "Run the Package Deployer tool"
+              },
+              {
+                "id": "define-the-solution-and-data-files-in-importconfig-xml",
+                "text": "Define the solution and data files in ImportConfig.xml"
+              },
+              {
+                "id": "run-the-solution-packager-tool",
+                "text": "Run the Solution Packager tool"
+              },
+              {
+                "id": "create-a-dynamics-365-package-project-in-visual-studio",
+                "text": "Create a Dynamics 365 Package project in Visual Studio"
+              }
+            ]
+          }
+        ],
+        "reuse": "once"
+      }
+    },
+    {
+      "exam": "C",
+      "n": 15,
+      "stem": [
+        {
+          "t": "HOTSPOT - You have a model-driven app that uses the Common Data Service (CDS). You create three custom entities that are in many-to-one parental relationships with the Account entity."
+        },
+        {
+          "t": "You run a real-time workflow that assigns an account you own to another user. You receive the error"
+        },
+        {
+          "t": "message as shown in the Error Message exhibit. (Click the Error Message tab.)"
+        },
+        {
+          "i": "313.jpg"
+        },
+        {
+          "t": "You check the security roles for the user as shown in the Manage User Roles exhibit. (Click the Manage User Roles tab.)"
+        },
+        {
+          "t": "You also check the privileges for that role as shown in the Common Data Service User Security Role exhibit. (Click the Security Role tab.)"
+        },
+        {
+          "i": "329.jpg"
+        },
+        {
+          "i": "309.jpg"
+        },
+        {
+          "t": "You need to prevent the error from recurring."
+        },
+        {
+          "t": "For each of the following statements, select Yes if the statement is true. Otherwise, select No."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        },
+        {
+          "t": "Hot Area:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-15",
+      "kind": "interactive",
+      "sourceId": "C-15",
+      "version": "2.0",
+      "interaction": {
+        "type": "boolean",
+        "rows": [
+          {
+            "id": "append-to-account",
+            "label": "Changing the Append To privilege on the Account entity to Organization prevents the error from recurring.",
+            "answer": "no",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "environment-maker",
+            "label": "Adding the Environment Maker role to the user prevents the error from recurring.",
+            "answer": "no",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "system-customizer",
+            "label": "Adding the system customizer role gives the user more access than needed to prevent the error from recurring.",
+            "answer": "yes",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "building-privileges",
+            "label": "Setting all the privileges for the Building entity to User prevents the error from recurring.",
+            "answer": "yes",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 16,
+      "stem": [
+        {
+          "t": "DRAG DROP - A company is creating a new system based on Microsoft Dataverse."
+        },
+        {
+          "t": "You need to select the features that meet the company's requirements."
+        },
+        {
+          "t": "Which options should you use? To answer, drag the appropriate options to the correct requirements. Each option may be used once, more than once, or not at all."
+        },
+        {
+          "t": "You may need to drag the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        },
+        {
+          "t": "Select and Place:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-16",
+      "kind": "interactive",
+      "sourceId": "C-16",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "table-ownership",
+            "label": "Visualize records as a hierarchy in a model-driven app.",
+            "answer": "self-referential-relationship",
+            "options": [
+              {
+                "id": "connection",
+                "text": "connection"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              },
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              }
+            ]
+          },
+          {
+            "id": "student-relationship",
+            "label": "Records in one entity must be able to reference only a single record in another entity.",
+            "answer": "one-to-many-relationship",
+            "options": [
+              {
+                "id": "connection",
+                "text": "connection"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              },
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              }
+            ]
+          },
+          {
+            "id": "student-relationship-behavior",
+            "label": "Any record in one entity must be able to be referenced by any record in another entity.",
+            "answer": "many-to-many-relationship",
+            "options": [
+              {
+                "id": "connection",
+                "text": "connection"
+              },
+              {
+                "id": "one-to-many-relationship",
+                "text": "one-to-many relationship"
+              },
+              {
+                "id": "many-to-many-relationship",
+                "text": "many-to-many relationship"
+              },
+              {
+                "id": "self-referential-relationship",
+                "text": "self-referential relationship"
+              }
+            ]
+          }
+        ],
+        "reuse": "multiple"
+      }
+    },
+    {
+      "exam": "C",
+      "n": 17,
+      "stem": [
+        {
+          "t": "HOTSPOT - A school district wants to standardize student information and student performance records. Students in the district are assigned to a specific school. Students are evaluated using class records."
+        },
+        {
+          "t": "When students move between schools in the middle of a school year, the student's current class history must be available to the administrators at the new school."
+        },
+        {
+          "t": "You need to configure Microsoft Dataverse tables to connect the class history records to their respective class records. How should you configure the table? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        },
+        {
+          "t": "Hot Area:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-17",
+      "kind": "interactive",
+      "sourceId": "C-17",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "class-record-ownership",
+            "label": "Table ownership for the class record table.",
+            "answer": "user-or-team",
+            "options": [
+              {
+                "id": "organization",
+                "text": "Organization"
+              },
+              {
+                "id": "user",
+                "text": "User"
+              },
+              {
+                "id": "user-or-team",
+                "text": "User or Team"
+              },
+              {
+                "id": "team",
+                "text": "Team"
+              }
+            ]
+          },
+          {
+            "id": "class-history-student-relationship",
+            "label": "Relationship of the class history table to the student table.",
+            "answer": "many-to-one",
+            "options": [
+              {
+                "id": "many-to-one",
+                "text": "Many-to-one"
+              },
+              {
+                "id": "one-to-many",
+                "text": "One-to-many"
+              },
+              {
+                "id": "many-to-many",
+                "text": "Many-to-many"
+              }
+            ]
+          },
+          {
+            "id": "class-history-relationship-behavior",
+            "label": "Behavior of the relationship between the class history table and the student table.",
+            "answer": "parental",
+            "options": [
+              {
+                "id": "parental",
+                "text": "Parental"
+              },
+              {
+                "id": "referential",
+                "text": "Referential"
+              },
+              {
+                "id": "custom",
+                "text": "Custom"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "C",
+      "n": 18,
+      "stem": [
+        {
+          "t": "HOTSPOT - You are developing an app for a sales team to record contact details in Microsoft Dataverse."
+        },
+        {
+          "t": "The app must handle loss of network and save the data to Dataverse when reconnected."
+        },
+        {
+          "t": "The main screen of the app has a form to collect contact data and a button. The OnSelect property for the button has the following expression:"
+        },
+        {
+          "t": "For each of the following statements, select Yes if the statement is true. Otherwise, select No."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Hot Area:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-18",
+      "kind": "interactive",
+      "sourceId": "C-18",
+      "version": "2.0",
+      "interaction": {
+        "type": "boolean",
+        "rows": [
+          {
+            "id": "offline-save",
+            "label": "The expression saves the data to CDS when reconnecting after losing network connection.",
+            "answer": "no",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "patch-collection",
+            "label": "The collection created by the Patch statement contains all contacts not saved to CDS.",
+            "answer": "no",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "updates-existing",
+            "label": "The expression updates existing contacts in CDS.",
+            "answer": "no",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "id": "handles-offline",
+            "label": "The expression handles loss of connection to CDS.",
+            "answer": "yes",
+            "options": [
+              {
+                "id": "yes",
+                "text": "Yes"
+              },
+              {
+                "id": "no",
+                "text": "No"
+              }
+            ]
+          }
+        ],
+        "contextCode": "If(\n    Connection.Connected,\n    Patch(\n        Contacts,\n        Defaults(Contacts),\n        {\n            'First Name': DataCardValue_FirstName.Text,\n            'Last Name': DataCardValue_LastName.Text\n        }\n    );\n    Navigate(ConfirmationScreen, ScreenTransition.Fade),\n    ClearCollect(\n        LocalRecord,\n        {\n            'First Name': DataCardValue_FirstName.Text,\n            'Last Name': DataCardValue.Text\n        }\n    );\n    SaveData(LocalRecord, \"LocalRecord\");\n    Navigate(PendingScreen, ScreenTransition.Fade)\n)"
+      }
+    },
+    {
+      "exam": "C",
+      "n": 19,
+      "stem": [
+        {
+          "t": "You are creating a new page for a Power Apps portal.yasta"
+        },
+        {
+          "t": "You need to display data from Microsoft Dataverse on the page."
+        },
+        {
+          "t": "What should you use?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Liquid"
+        },
+        {
+          "k": "B",
+          "t": "CSS"
+        },
+        {
+          "k": "C",
+          "t": "iFrame"
+        },
+        {
+          "k": "D",
+          "t": "Bootstrap"
+        }
+      ],
+      "ans": "A",
+      "multi": false,
+      "id": "v2-C-19",
+      "sourceId": "C-19",
+      "version": "2.0"
+    },
+    {
+      "exam": "C",
+      "n": 20,
+      "stem": [
+        {
+          "t": "DRAG DROP - You are creating a canvas app for a company. A security role has been created for sales representatives and a second security role has been created for sales managers."
+        },
+        {
+          "t": "The canvas app has the following requirements: ✑ Sales managers must be able to view the records of the salespeople in their business unit. ✑ Sales managers must be the only people who can view sales probability data in opportunity records. ✑ Sales representatives and new hires assigned to the same territory share access to sales records."
+        },
+        {
+          "t": "You need to assign permissions for the app."
+        },
+        {
+          "t": "Which security options should you use? To answer, drag the appropriate security options to the correct scenarios. Each security option may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point."
+        },
+        {
+          "t": "Select and Place:"
+        }
+      ],
+      "ex": [],
+      "self": false,
+      "ansText": "",
+      "id": "v2-C-20",
+      "kind": "interactive",
+      "sourceId": "C-20",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "edit-accounts",
+            "label": "Privilege provided to edit accounts.",
+            "answer": "security-role",
+            "options": [
+              {
+                "id": "security-role",
+                "text": "Security role"
+              },
+              {
+                "id": "business-unit",
+                "text": "Business unit"
+              },
+              {
+                "id": "microsoft-entra-id-role",
+                "text": "Microsoft Entra ID role"
+              },
+              {
+                "id": "field-security-profile",
+                "text": "Field security profile"
+              }
+            ]
+          },
+          {
+            "id": "account-table-access",
+            "label": "Access level for the Account table.",
+            "answer": "business-unit-update",
+            "options": [
+              {
+                "id": "user-create",
+                "text": "User Create"
+              },
+              {
+                "id": "user-update",
+                "text": "User Update"
+              },
+              {
+                "id": "business-unit-create",
+                "text": "Business Unit Create"
+              },
+              {
+                "id": "business-unit-update",
+                "text": "Business Unit Update"
+              }
+            ]
+          },
+          {
+            "id": "notes-table-access",
+            "label": "Access level for the Notes table.",
+            "answer": "user-append",
+            "options": [
+              {
+                "id": "user-append",
+                "text": "User Append"
+              },
+              {
+                "id": "user-append-to",
+                "text": "User Append To"
+              },
+              {
+                "id": "business-unit-append",
+                "text": "Business Unit Append"
+              },
+              {
+                "id": "business-unit-append-to",
+                "text": "Business Unit Append To"
+              }
+            ]
+          },
+          {
+            "id": "team-type",
+            "label": "Team type to assign privileges to.",
+            "answer": "microsoft-entra-id-office-group",
+            "options": [
+              {
+                "id": "access",
+                "text": "Access"
+              },
+              {
+                "id": "owner",
+                "text": "Owner"
+              },
+              {
+                "id": "microsoft-entra-id-office-group",
+                "text": "Microsoft Entra ID Office Group"
+              },
+              {
+                "id": "microsoft-entra-id-security-group",
+                "text": "Microsoft Entra ID Security Group"
+              }
+            ]
+          }
+        ],
+        "reuse": "multiple"
+      }
+    }
+  ]
+}
