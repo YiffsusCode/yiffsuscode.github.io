@@ -1,0 +1,1239 @@
+{
+  "version": "2.0",
+  "exam": "A",
+  "questions": [
+    {
+      "exam": "A",
+      "n": 1,
+      "stem": [
+        {
+          "t": "A company manages capital equipment for an electric utility company. The company has a SQL Server d atabase that contains maintenance records for the equipment."
+        },
+        {
+          "t": "Technicians who service the equipment use the Dynamics 365 Field Service mobile app on tablet devices to view scheduled assignments. Technicians use a canvas app to display the maintenance history for each piece of equipment and update the history. Managers use a Power BI dashboard that displays Dynamics 365 Field Service and real-time maintenance data."
+        },
+        {
+          "t": "Due to increasing demand, managers must be able to work in the field as technicians. You need to design a solution that allows the managers to work from one single screen. What should you do?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Add the maintenance history app to the Field Service Mobile app"
+        },
+        {
+          "k": "B",
+          "t": "Add the manager Power BI dashboard to the Field Service mobile app"
+        },
+        {
+          "k": "C",
+          "t": "Create a new maintenance canvas app from within the Power BI management dashboard"
+        },
+        {
+          "k": "D",
+          "t": "Add the maintenance history app to the Power BI Dashboard"
+        }
+      ],
+      "ans": "A",
+      "multi": false,
+      "id": "v2-A-1",
+      "sourceId": "A-1",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 2,
+      "stem": [
+        {
+          "t": "HOTSPOT - You work for a staffing company that helps employees fill temporary jobs. Available temporary jobs are categorized and listed on a secure area of the company's website."
+        },
+        {
+          "t": "The company wants to eliminate manual work that relates to job and candidate management. The company plans to invite employers with available jobs and job candidates to view jobs by sending personalized invitations. The company identifies the following requirements:"
+        },
+        {
+          "t": "Human resources team members from the staffing company must be able to access the jobs listing and post available positions."
+        },
+        {
+          "t": "Employers seeking temporary employees must also be able to access the jobs listing and post available positions."
+        },
+        {
+          "t": "Approved job candidates must be notified about new positions for which they are qualified."
+        },
+        {
+          "t": "Approved job candidate must have an option to accept a job assignment directly from a notification."
+        },
+        {
+          "t": "You need to perform a gap analysis against the features and capabilities of the Power Platform. Which features should you implement? To answer, select the appropriate options in the answer area. NOTE: Each correct selection is worth one point. Hot Area:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-2",
+      "kind": "interactive",
+      "sourceId": "A-2",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "portal",
+            "label": "Create the job listings portal.",
+            "answer": "custom-self-service-portal-for-both-employers-and-job-candidates",
+            "options": [
+              {
+                "id": "custom-self-service-portal-for-employers-and-a-custom-page-for-job-candidates",
+                "text": "Custom self-service portal for employers and a custom page for job candidates"
+              },
+              {
+                "id": "custom-self-service-portal-for-both-employers-and-job-candidates",
+                "text": "Custom self-service portal for both employers and job candidates"
+              },
+              {
+                "id": "portal-for-job-candidates-and-a-custom-self-service-portal-for-employers",
+                "text": "Portal for job candidates and a custom self-service portal for employers"
+              },
+              {
+                "id": "portal-from-blank-for-job-candidates-and-employers",
+                "text": "Portal from blank for job candidates and employers"
+              }
+            ]
+          },
+          {
+            "id": "positions-app",
+            "label": "Create an app that lists available positions.",
+            "answer": "model-driven-app-with-push-notifications",
+            "options": [
+              {
+                "id": "canvas-app-with-push-notifications",
+                "text": "Canvas app with push notifications"
+              },
+              {
+                "id": "model-driven-app-with-push-notifications",
+                "text": "Model-driven app with push notifications"
+              },
+              {
+                "id": "portal-app-with-push-notifications",
+                "text": "Portal app with push notifications"
+              }
+            ]
+          },
+          {
+            "id": "employer-app",
+            "label": "Create the app for employers who are seeking temporary employees.",
+            "answer": "webform-with-target-set-to-the-job-custom-entity",
+            "options": [
+              {
+                "id": "entity-form-defined-on-the-job-custom-entity",
+                "text": "Entity form defined on the job custom entity"
+              },
+              {
+                "id": "webform-with-target-set-to-the-job-custom-entity",
+                "text": "Webform with target set to the job custom entity"
+              },
+              {
+                "id": "web-page-defined-on-the-job-custom-entity",
+                "text": "Web page defined on the job custom entity"
+              },
+              {
+                "id": "web-step-with-target-set-to-the-job-custom-entity",
+                "text": "Web step with target set to the job custom entity"
+              }
+            ]
+          },
+          {
+            "id": "candidate-invitation",
+            "label": "Create invitation parameters for job candidates.",
+            "answer": "configure-a-value-for-the-execute-workflow-on-redeeming-contact-option-only",
+            "options": [
+              {
+                "id": "configure-a-value-for-the-assigned-to-account-option-only",
+                "text": "Configure a value for the Assigned to Account option only."
+              },
+              {
+                "id": "configure-a-value-for-the-execute-workflow-on-redeeming-contact-option-only",
+                "text": "Configure a value for the Execute Workflow on Redeeming Contact option only."
+              },
+              {
+                "id": "configure-values-for-assigned-to-account-and-execute-workflow-on-redeeming-contact",
+                "text": "Configure values for Assigned to Account and Execute Workflow on Redeeming Contact."
+              },
+              {
+                "id": "leave-both-assigned-to-account-and-execute-workflow-on-redeeming-contact-empty",
+                "text": "Leave both Assigned to Account and Execute Workflow on Redeeming Contact empty."
+              }
+            ]
+          },
+          {
+            "id": "approved-invitation",
+            "label": "Create invitation parameters for approved job candidates.",
+            "answer": "configure-a-value-for-the-assigned-to-account-option-only",
+            "options": [
+              {
+                "id": "configure-a-value-for-the-assigned-to-account-option-only",
+                "text": "Configure a value for the Assigned to Account option only."
+              },
+              {
+                "id": "configure-a-value-for-the-execute-workflow-on-redeeming-contact-option-only",
+                "text": "Configure a value for the Execute Workflow on Redeeming Contact option only."
+              },
+              {
+                "id": "configure-values-for-assigned-to-account-and-execute-workflow-on-redeeming-contact",
+                "text": "Configure values for Assigned to Account and Execute Workflow on Redeeming Contact."
+              },
+              {
+                "id": "leave-both-assigned-to-account-and-execute-workflow-on-redeeming-contact-empty",
+                "text": "Leave both Assigned to Account and Execute Workflow on Redeeming Contact empty."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "A",
+      "n": 3,
+      "stem": [
+        {
+          "t": "You create a suite of Power Platform-based order management canvas apps for a bakery that has five retail stores. Each store uses a tablet device to manage inventory and process orders."
+        },
+        {
+          "t": "You need to make the following changes to the original order tracking app: When an online order for delivery is received, send the order to the bakery that is located closest to the order destination."
+        },
+        {
+          "t": "When an online order for pickup is received, require store staff to enter an estimated time in an app. Staff must prepare the order and then use the app to notify the customer when the order is ready."
+        },
+        {
+          "t": "Allow the store manager to personalize the company's corporate weekly newsletter and add store- specific specials."
+        },
+        {
+          "t": "You must minimize the amount of custom code and configuration required to implement the solution. What should you use? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Hot Area:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-3",
+      "kind": "interactive",
+      "sourceId": "A-3",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "nearest-store",
+            "label": "Determine which store is closest to the order destination.",
+            "answer": "power-automate-flow",
+            "options": [
+              {
+                "id": "power-automate-flow",
+                "text": "Power Automate flow"
+              },
+              {
+                "id": "plug-in",
+                "text": "Plug-in"
+              },
+              {
+                "id": "logic-app",
+                "text": "Logic app"
+              }
+            ]
+          },
+          {
+            "id": "estimate-order",
+            "label": "Estimate the time required to prepare an order and notify the customer.",
+            "answer": "new-screen-in-an-existing-order-canvas-app",
+            "options": [
+              {
+                "id": "new-screen-in-an-existing-order-canvas-app",
+                "text": "New screen in an existing order canvas app"
+              },
+              {
+                "id": "new-canvas-app",
+                "text": "New canvas app"
+              },
+              {
+                "id": "new-logic-app",
+                "text": "New logic app"
+              }
+            ]
+          },
+          {
+            "id": "newsletter",
+            "label": "Send the newsletter by email to customers.",
+            "answer": "power-automate-flow-triggered-from-an-email-button",
+            "options": [
+              {
+                "id": "power-automate-flow-triggered-from-an-email-button",
+                "text": "Power Automate flow triggered from an email button"
+              },
+              {
+                "id": "power-automate-flow-triggered-manually",
+                "text": "Power Automate flow triggered manually"
+              },
+              {
+                "id": "power-automate-ui-flow-triggered-from-an-email-button",
+                "text": "Power Automate UI flow triggered from an email button"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "A",
+      "n": 4,
+      "stem": [
+        {
+          "t": "A company has an application that provides API access. You plan to connect to the API from a canvas app by using a custom connector. You need to request information from the API developers so that you can create the custom connector. Which two types of files can you use?"
+        },
+        {
+          "t": "Each correct answer presents a complete solution. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "YAML"
+        },
+        {
+          "k": "B",
+          "t": "WSDL"
+        },
+        {
+          "k": "C",
+          "t": "OpenAPI Definition"
+        },
+        {
+          "k": "D",
+          "t": "Postman Collection"
+        }
+      ],
+      "ans": "CD",
+      "multi": true,
+      "id": "v2-A-4",
+      "sourceId": "A-4",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 5,
+      "stem": [
+        {
+          "t": "You plan to create a canvas app to manage large sets of records. Users will filter and sort the data. You must implement delegation in the canvas app to mitigate potential performance issues. You need to recommend data sources for the app. Which two data sources should you recommend?"
+        },
+        {
+          "t": "Each correct answer presents a complete solution. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "SQL Server"
+        },
+        {
+          "k": "B",
+          "t": "Common Data Service"
+        },
+        {
+          "k": "C",
+          "t": "Azure Data Factory"
+        },
+        {
+          "k": "D",
+          "t": "Azure Table Storage"
+        }
+      ],
+      "ans": "AB",
+      "multi": true,
+      "id": "v2-A-5",
+      "sourceId": "A-5",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 6,
+      "stem": [
+        {
+          "t": "A client is deploying Dynamics 365 Finance without any third-party add-ons. You need to select the appropriate solutions for the client. What should you select? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Hot Area:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-6",
+      "kind": "interactive",
+      "sourceId": "A-6",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "barcode-scanning",
+            "label": "Warehouse employees can use mobile devices to scan barcodes by using Dynamics 365 Finance.",
+            "answer": "out-of-the-box",
+            "options": [
+              {
+                "id": "out-of-the-box",
+                "text": "Out-of-the-box"
+              },
+              {
+                "id": "logic-apps",
+                "text": "Logic apps"
+              },
+              {
+                "id": "power-automate",
+                "text": "Power Automate"
+              },
+              {
+                "id": "common-data-service",
+                "text": "Common Data Service"
+              }
+            ]
+          },
+          {
+            "id": "technician-location",
+            "label": "The location of field technicians can be communicated with a text message from Dynamics 365 Field Service.",
+            "answer": "power-automate",
+            "options": [
+              {
+                "id": "common-data-service",
+                "text": "Common Data Service"
+              },
+              {
+                "id": "workflow",
+                "text": "Workflow"
+              },
+              {
+                "id": "power-automate",
+                "text": "Power Automate"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "A",
+      "n": 7,
+      "stem": [
+        {
+          "t": "A company uses Microsoft 365. You are developing a model-driven app."
+        },
+        {
+          "t": "The app must meet the following requirements:"
+        },
+        {
+          "t": "Use SharePoint Online for document storage."
+        },
+        {
+          "t": "Send emails by using Exchange Online. You need to configure integrations. What should you configure? To answer, drag the appropriate configuration options to the correct requirements. Each configuration option may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Select and Place:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-7",
+      "kind": "interactive",
+      "sourceId": "A-7",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "email",
+            "label": "Email",
+            "answer": "server-side-synchronization",
+            "options": [
+              {
+                "id": "server-side-synchronization",
+                "text": "Server-side synchronization"
+              },
+              {
+                "id": "server-based-integration",
+                "text": "Server-based integration"
+              },
+              {
+                "id": "dual-write",
+                "text": "Dual-write"
+              },
+              {
+                "id": "system-settings",
+                "text": "System settings"
+              }
+            ]
+          },
+          {
+            "id": "document-storage",
+            "label": "Document storage",
+            "answer": "server-based-integration",
+            "options": [
+              {
+                "id": "server-side-synchronization",
+                "text": "Server-side synchronization"
+              },
+              {
+                "id": "server-based-integration",
+                "text": "Server-based integration"
+              },
+              {
+                "id": "dual-write",
+                "text": "Dual-write"
+              },
+              {
+                "id": "system-settings",
+                "text": "System settings"
+              }
+            ]
+          }
+        ],
+        "reuse": "once"
+      }
+    },
+    {
+      "exam": "A",
+      "n": 8,
+      "stem": [
+        {
+          "t": "A company plans to create an order processing app. When orders are created, the app will perform"
+        },
+        {
+          "t": "complex business logic and integrate with several external systems."
+        },
+        {
+          "t": "Orders that have a large number of line items may take up to six minutes to complete. Processing for each order must be completed in one operation to avoid leaving records in an incomplete state."
+        },
+        {
+          "t": "You need to recommend a solution for the company. What should you recommend?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "an asynchronous workflow that uses a custom workflow activity"
+        },
+        {
+          "k": "B",
+          "t": "a real-time workflow that uses a custom action"
+        },
+        {
+          "k": "C",
+          "t": "a Webhook that connects to an Azure Function"
+        },
+        {
+          "k": "D",
+          "t": "an asynchronous plug-in"
+        }
+      ],
+      "ans": "C",
+      "multi": false,
+      "id": "v2-A-8",
+      "sourceId": "A-8",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 9,
+      "stem": [
+        {
+          "t": "You work for a not-for-profit agency that manages business processes by using Power Platform custom entities. Volunteer registration and onboarding are manual processes that include multiple related entities."
+        },
+        {
+          "t": "You need to implement a portal solution that replaces the manual processes. Which modules should you use? To answer, select the appropriate options in the answer area."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Hot Area:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-9",
+      "kind": "interactive",
+      "sourceId": "A-9",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "portal-template",
+            "label": "Create a portal by using a portal template.",
+            "answer": "community-portal",
+            "options": [
+              {
+                "id": "starter-portal",
+                "text": "Starter portal"
+              },
+              {
+                "id": "community-portal",
+                "text": "Community portal"
+              },
+              {
+                "id": "customer-self-service-portal",
+                "text": "Customer self-service portal"
+              }
+            ]
+          },
+          {
+            "id": "volunteer-registration",
+            "label": "Manage volunteer registration.",
+            "answer": "webform",
+            "options": [
+              {
+                "id": "entity-form-metadata",
+                "text": "Entity form metadata"
+              },
+              {
+                "id": "webform",
+                "text": "Webform"
+              },
+              {
+                "id": "webform-step",
+                "text": "Webform step"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "A",
+      "n": 10,
+      "stem": [
+        {
+          "t": "You are implementing custom business logic in a Power Apps portal. You need to use Liquid templates to display dynamic content."
+        },
+        {
+          "t": "To which three entities can you include Liquid code? Each correct answer presents a complete solution. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Content snippet"
+        },
+        {
+          "k": "B",
+          "t": "Web page"
+        },
+        {
+          "k": "C",
+          "t": "Web template"
+        },
+        {
+          "k": "D",
+          "t": "Page template"
+        },
+        {
+          "k": "E",
+          "t": "Portal settings"
+        }
+      ],
+      "ans": "ABC",
+      "multi": true,
+      "id": "v2-A-10",
+      "sourceId": "A-10",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 11,
+      "stem": [
+        {
+          "t": "Teachers in a school district use Azure skill bots to teach specific classes. Students sign into an online portal to submit completed homework to their teacher for review. Students use a Power Virtual Agents chatbot to request help from teachers."
+        },
+        {
+          "t": "You need to incorporate the skill bot for each class into the homework bot."
+        },
+        {
+          "t": "Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order."
+        },
+        {
+          "t": "Select and Place:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-11",
+      "kind": "interactive",
+      "sourceId": "A-11",
+      "version": "2.0",
+      "interaction": {
+        "type": "order",
+        "rows": [
+          {
+            "id": "step-1",
+            "label": "Step 1",
+            "answer": "register-the-skill-bot-in-azure-active-directory",
+            "options": [
+              {
+                "id": "create-a-manifest-for-the-skill-bot",
+                "text": "Create a manifest for the skill bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-azure-active-directory",
+                "text": "Register the skill bot in Azure Active Directory."
+              },
+              {
+                "id": "register-the-homework-bot-in-power-virtual-agents",
+                "text": "Register the homework bot in Power Virtual Agents."
+              },
+              {
+                "id": "register-the-homework-bot-in-azure-active-directory",
+                "text": "Register the homework bot in Azure Active Directory."
+              },
+              {
+                "id": "create-a-manifest-for-the-homework-bot",
+                "text": "Create a manifest for the homework bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-power-virtual-agents",
+                "text": "Register the skill bot in Power Virtual Agents."
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "label": "Step 2",
+            "answer": "create-a-manifest-for-the-skill-bot",
+            "options": [
+              {
+                "id": "create-a-manifest-for-the-skill-bot",
+                "text": "Create a manifest for the skill bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-azure-active-directory",
+                "text": "Register the skill bot in Azure Active Directory."
+              },
+              {
+                "id": "register-the-homework-bot-in-power-virtual-agents",
+                "text": "Register the homework bot in Power Virtual Agents."
+              },
+              {
+                "id": "register-the-homework-bot-in-azure-active-directory",
+                "text": "Register the homework bot in Azure Active Directory."
+              },
+              {
+                "id": "create-a-manifest-for-the-homework-bot",
+                "text": "Create a manifest for the homework bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-power-virtual-agents",
+                "text": "Register the skill bot in Power Virtual Agents."
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "label": "Step 3",
+            "answer": "register-the-skill-bot-in-power-virtual-agents",
+            "options": [
+              {
+                "id": "create-a-manifest-for-the-skill-bot",
+                "text": "Create a manifest for the skill bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-azure-active-directory",
+                "text": "Register the skill bot in Azure Active Directory."
+              },
+              {
+                "id": "register-the-homework-bot-in-power-virtual-agents",
+                "text": "Register the homework bot in Power Virtual Agents."
+              },
+              {
+                "id": "register-the-homework-bot-in-azure-active-directory",
+                "text": "Register the homework bot in Azure Active Directory."
+              },
+              {
+                "id": "create-a-manifest-for-the-homework-bot",
+                "text": "Create a manifest for the homework bot."
+              },
+              {
+                "id": "register-the-skill-bot-in-power-virtual-agents",
+                "text": "Register the skill bot in Power Virtual Agents."
+              }
+            ]
+          }
+        ],
+        "reuse": "once"
+      }
+    },
+    {
+      "exam": "A",
+      "n": 12,
+      "stem": [
+        {
+          "t": "A company is migrating from an on-premises Dynamics 365 installation to a Power Platform solution. You are creating plug-ins for the new solution. You need to register the plug-ins. Which isolation mode should you use?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "None"
+        },
+        {
+          "k": "B",
+          "t": "Global Assembly Cache (GAC)"
+        },
+        {
+          "k": "C",
+          "t": "Sandbox"
+        },
+        {
+          "k": "D",
+          "t": "Disk"
+        }
+      ],
+      "ans": "C",
+      "multi": false,
+      "id": "v2-A-12",
+      "sourceId": "A-12",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 13,
+      "stem": [
+        {
+          "t": "An organization uses a public-facing Power Apps portal. You need to change the layout of a specific web page. What are two possible ways to achieve the goal?"
+        },
+        {
+          "t": "Each correct answer presents a complete solution. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Select the Portal Management app and then select Edit"
+        },
+        {
+          "k": "B",
+          "t": "Select the Portal Management app and then Select Play"
+        },
+        {
+          "k": "C",
+          "t": "Select the portal app and then select Manage"
+        },
+        {
+          "k": "D",
+          "t": "Select the portal app and then Select Edit"
+        }
+      ],
+      "ans": "BD",
+      "multi": true,
+      "id": "v2-A-13",
+      "sourceId": "A-13",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 14,
+      "stem": [
+        {
+          "t": "You are building a custom application in Azure to process resumes for the HR department. The app will monitor submissions of resumes and parse the resumes. You need to parse the resumes and save contact and skills information into the Common Data Service. Which mechanism should you use?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Power Automate"
+        },
+        {
+          "k": "B",
+          "t": "Common Data Service plug-in"
+        },
+        {
+          "k": "C",
+          "t": "Web API"
+        },
+        {
+          "k": "D",
+          "t": "Custom workflow activity"
+        }
+      ],
+      "ans": "C",
+      "multi": false,
+      "id": "v2-A-14",
+      "sourceId": "A-14",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 15,
+      "stem": [
+        {
+          "t": "You are researching integrations with several external systems. Each integration has different requirements."
+        },
+        {
+          "t": "You need to determine which data sources to use to meet each requirement. What should you use? To answer, drag the appropriate data sources to the correct requirements. Each data source may be used once, more than one, or not at all. You may need to drag the split bar between panes or scroll to view content."
+        },
+        {
+          "t": "NOTE: Each correct selection is worth one point. Select and Place:"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-15",
+      "kind": "interactive",
+      "sourceId": "A-15",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "integer-primary-key",
+            "label": "Support records that use an integer as a primary key.",
+            "answer": "custom-connector",
+            "options": [
+              {
+                "id": "virtual-entity",
+                "text": "Virtual entity"
+              },
+              {
+                "id": "custom-connector",
+                "text": "Custom connector"
+              }
+            ]
+          },
+          {
+            "id": "read-update-data",
+            "label": "Ensure that data can be read and updated.",
+            "answer": "custom-connector",
+            "options": [
+              {
+                "id": "virtual-entity",
+                "text": "Virtual entity"
+              },
+              {
+                "id": "custom-connector",
+                "text": "Custom connector"
+              }
+            ]
+          },
+          {
+            "id": "dataverse-clients",
+            "label": "Ensure that data is available to all Microsoft Dataverse clients.",
+            "answer": "virtual-entity",
+            "options": [
+              {
+                "id": "virtual-entity",
+                "text": "Virtual entity"
+              },
+              {
+                "id": "custom-connector",
+                "text": "Custom connector"
+              }
+            ]
+          }
+        ],
+        "reuse": "multiple"
+      }
+    },
+    {
+      "exam": "A",
+      "n": 16,
+      "stem": [
+        {
+          "t": "A Power Platform solution includes the following Web API call: GET http://contoso.crm.dynamics.com/api/data/v9.1/RelationshipDefinitions?$select=SchemaName You need to explain what this line of code is doing. What does the code do?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Retrieve the list of relationships between Tables"
+        },
+        {
+          "k": "B",
+          "t": "Retrieve a list of tables that are related to each other"
+        },
+        {
+          "k": "C",
+          "t": "Retrieve a list of one-to-many relationships with other tables"
+        },
+        {
+          "k": "D",
+          "t": "Retrieve a list of tables that have more than one relationship"
+        },
+        {
+          "k": "E",
+          "t": "Retrieve a list of many-to-many relationships with other tables"
+        }
+      ],
+      "ans": "A",
+      "multi": false,
+      "id": "v2-A-16",
+      "sourceId": "A-16",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 17,
+      "stem": [
+        {
+          "t": "You create a Power Automate flow that retrieves data from the Microsoft Dataverse Account table. The flow uses only a subset of Account table data. You need to retrieve the required data."
+        },
+        {
+          "t": "How should you configure the Dataverse List Rows action? To answer, select the appropriate options in the answer area. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-17",
+      "kind": "interactive",
+      "sourceId": "A-17",
+      "version": "2.0",
+      "interaction": {
+        "type": "select-grid",
+        "rows": [
+          {
+            "id": "primary-contact-name",
+            "label": "Full name of the primary contact.",
+            "answer": "expand-query-primarycontactid-select-fullname",
+            "options": [
+              {
+                "id": "expand-query-primarycontactid-select-fullname",
+                "text": "Expand Query = /primarycontactid($select=fullname)"
+              },
+              {
+                "id": "select-columns-fullname",
+                "text": "Select columns = fullname"
+              },
+              {
+                "id": "select-columns-primarycontactid-fullname",
+                "text": "Select columns = primarycontactid, fullname"
+              },
+              {
+                "id": "expand-query-primarycontactid-select-fullname",
+                "text": "Expand Query = /primarycontactid?$select=fullname"
+              }
+            ]
+          },
+          {
+            "id": "highest-credit-limit",
+            "label": "Account with the highest credit limit.",
+            "answer": "row-count-1-and-sort-by-creditlimit-desc",
+            "options": [
+              {
+                "id": "row-count-1-and-sort-by-creditlimit-desc",
+                "text": "Row count = 1 and Sort By = creditlimit desc"
+              },
+              {
+                "id": "row-count-1-and-sort-by-creditlimit-asc",
+                "text": "Row count = 1 and Sort By = creditlimit asc"
+              },
+              {
+                "id": "expand-query-expand-account-top-1-select-creditlimit",
+                "text": "Expand Query = expand=account($top=1;$select=creditlimit)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "exam": "A",
+      "n": 18,
+      "stem": [
+        {
+          "t": "You are creating a canvas app to retrieve user sign in information from Microsoft Azure Active Directory (Azure AD) when someone searches for information about an end user. You create an Azure Function to retrieve the required information by using JSON. You need to ensure that the application functions correctly. Which two actions should you perform? Each correct answer presents part of the solution. NOTE: Each correct selection is worth one point."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Create a Power Automate flow to import data"
+        },
+        {
+          "k": "B",
+          "t": "Create a custom connector by using the Azure Function API)"
+        },
+        {
+          "k": "C",
+          "t": "Use app designer in the Power Platform admin center"
+        },
+        {
+          "k": "D",
+          "t": "Use Azure Service Bus"
+        },
+        {
+          "k": "E",
+          "t": "Create an API definition for the Azure Function"
+        }
+      ],
+      "ans": "BE",
+      "multi": true,
+      "id": "v2-A-18",
+      "sourceId": "A-18",
+      "version": "2.0"
+    },
+    {
+      "exam": "A",
+      "n": 19,
+      "stem": [
+        {
+          "t": "A company is configuring Microsoft Power Virtual Agents and Power Automate flows that use model-driven apps. The company has a website that uses Power Pages. You create Power Virtual Agents bot topics. You must configure the following: • Use a bot on the website. • Create Bot Framework skills. • Create a support request from the bot without human interaction. You need to configure the website."
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "self": false,
+      "ansText": "",
+      "id": "v2-A-19",
+      "kind": "interactive",
+      "sourceId": "A-19",
+      "version": "2.0",
+      "interaction": {
+        "type": "assign",
+        "rows": [
+          {
+            "id": "website-bot",
+            "label": "Use a bot on the website.",
+            "answer": "power-pages",
+            "options": [
+              {
+                "id": "power-virtual-agents",
+                "text": "Power Virtual Agents"
+              },
+              {
+                "id": "power-automate",
+                "text": "Power Automate"
+              },
+              {
+                "id": "power-pages",
+                "text": "Power Pages"
+              },
+              {
+                "id": "power-app",
+                "text": "Power App"
+              }
+            ]
+          },
+          {
+            "id": "bot-framework-skills",
+            "label": "Create Bot Framework skills.",
+            "answer": "power-virtual-agents",
+            "options": [
+              {
+                "id": "power-virtual-agents",
+                "text": "Power Virtual Agents"
+              },
+              {
+                "id": "power-automate",
+                "text": "Power Automate"
+              },
+              {
+                "id": "power-pages",
+                "text": "Power Pages"
+              },
+              {
+                "id": "power-app",
+                "text": "Power App"
+              }
+            ]
+          },
+          {
+            "id": "support-request",
+            "label": "Create a support request from the bot without human interaction.",
+            "answer": "power-automate",
+            "options": [
+              {
+                "id": "power-virtual-agents",
+                "text": "Power Virtual Agents"
+              },
+              {
+                "id": "power-automate",
+                "text": "Power Automate"
+              },
+              {
+                "id": "power-pages",
+                "text": "Power Pages"
+              },
+              {
+                "id": "power-app",
+                "text": "Power App"
+              }
+            ]
+          }
+        ],
+        "reuse": "once"
+      }
+    },
+    {
+      "exam": "A",
+      "n": 20,
+      "stem": [
+        {
+          "t": "You are configuring a custom connector for a web service. The web service is hosted in two different regions. The web service URL includes a common domain name and a unique sub-domain for each region."
+        },
+        {
+          "t": "The custom connector must allow the region to be entered for additional regions when creating the connection. You need to create a policy template. Which template type should you use?"
+        }
+      ],
+      "ex": [],
+      "flag": "ok",
+      "opts": [
+        {
+          "k": "A",
+          "t": "Set HTTP header"
+        },
+        {
+          "k": "B",
+          "t": "Route request"
+        },
+        {
+          "k": "C",
+          "t": "Set Host URL"
+        },
+        {
+          "k": "D",
+          "t": "Set query string parameter"
+        }
+      ],
+      "ans": "C",
+      "multi": false,
+      "id": "v2-A-20",
+      "sourceId": "A-20",
+      "version": "2.0"
+    }
+  ]
+}
