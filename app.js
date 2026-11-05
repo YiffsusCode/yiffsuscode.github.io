@@ -24,16 +24,18 @@ I18N.es.kindInteractive = 'Controles interactivos';
 I18N.en.kindInteractive = 'Interactive controls';
 I18N.es.selectMany = 'Selecciona todas las que correspondan';
 I18N.en.selectMany = 'Select all that apply';
+Object.assign(I18N.es, { selectUpTo: 'Selecciona {n} (máximo)', clearAnswer: 'Quitar respuesta', dropHere: 'Suelta aquí', dragHint: 'Arrastra una opción hasta su hueco, o toca una opción y luego el hueco. Usa × para quitar una respuesta.', refImage: 'Ver imagen original', solImage: 'Imagen de la solución original', progress: 'Tu progreso', statCorrect: 'Acertadas', statWrong: 'Falladas', statNone: 'Sin responder', scope: 'Qué preguntas incluir', scopeAll: 'Todas', scopeFailed: 'Falladas', scopeCorrect: 'Acertadas', scopeAnswered: 'Acertadas + falladas', scopeNone: 'Sin responder', progressNote: 'Según tu último resultado en cada pregunta.' });
+Object.assign(I18N.en, { selectUpTo: 'Select {n} (maximum)', clearAnswer: 'Clear answer', dropHere: 'Drop here', dragHint: 'Drag an option onto its slot, or tap an option and then the slot. Use × to clear an answer.', refImage: 'Show original image', solImage: 'Original solution image', progress: 'Your progress', statCorrect: 'Correct', statWrong: 'Wrong', statNone: 'Unanswered', scope: 'Which questions to include', scopeAll: 'All', scopeFailed: 'Wrong', scopeCorrect: 'Correct', scopeAnswered: 'Correct + wrong', scopeNone: 'Unanswered', progressNote: 'Based on your latest result for each question.' });
 I18N.es.version1 = 'Versión 1.0 · Originales';
 I18N.en.version1 = 'Version 1.0 · Original';
-I18N.es.version2 = 'Versión 2.0 · Migrados';
-I18N.en.version2 = 'Version 2.0 · Migrated';
+I18N.es.version2 = 'Versión 2.1 · Migrados';
+I18N.en.version2 = 'Version 2.1 · Migrated';
 I18N.es.latestVersion = 'Última versión';
 I18N.en.latestVersion = 'Latest version';
 I18N.es.outdatedVersion = 'Versión antigua';
 I18N.en.outdatedVersion = 'Outdated version';
-I18N.es.v2Unavailable = 'Para cargar la versión 2.0, abre la app desde el sitio publicado o un servidor local.';
-I18N.en.v2Unavailable = 'Open the app from its published site or a local server to load version 2.0.';
+I18N.es.v2Unavailable = 'Para cargar la versión 2.1, abre la app desde el sitio publicado o un servidor local.';
+I18N.en.v2Unavailable = 'Open the app from its published site or a local server to load version 2.1.';
 let lang = 'es'; try { const s = localStorage.getItem('pl400.lang'); if (s && I18N[s]) lang = s } catch (e) { }
 const T = (k, v) => { let s = I18N[lang][k] || k; if (v) for (const [a, b] of Object.entries(v)) s = s.replace('{' + a + '}', b); return s };
 const LS_FAILED = 'pl400.failed', LS_ATT = 'pl400.attempts';
@@ -69,23 +71,36 @@ const byId = new Map(QUESTION_DATA.map(d => [d.id, d]));
 const V1_EXAMS = [...new Set(DATA.map(d => d.exam))].sort();
 const V2_EXAMS = [...new Set(V2_DATA.map(d => d.exam))].sort();
 const examKey = (version, exam) => `${version}:${exam}`;
-const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, onlyFailed: false };
+const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, scope: 'all' };
+let refOpen = false;
+try { refOpen = localStorage.getItem('pl400.refimg') === '1' } catch (e) { }
 let view = 'setup', run = null, viewAtt = null, viewFrom = 'history', wrongOnly = true;
 let histSel = [], delConfirm = null, exitOpen = false, clearConfirm = false;
 let cmpFilter = 'all', ioMsg = '', ioText = '';
 const bankState = { exams: new Set([...V1_EXAMS.map(exam => examKey('1.0', exam)), ...V2_EXAMS.map(exam => examKey('2.0', exam))]), q: '', type: 'all', limit: 40 };
 const APP_VERSION = '2.0', LATEST_VERSION = '2.0';
+const shownVersion = v => v === '2.0' ? '2.1' : v;
 const app = document.getElementById('app');
 const mount = (...nodes) => app.replaceChildren(...nodes.flat(Infinity).filter(n => n && n.nodeType));
 const IMGSRC = f => (typeof IMGDATA !== 'undefined' && IMGDATA[f]) || 'img/' + f;
 const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === 'class') e.className = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else if (k.startsWith('aria-')) e.setAttribute(k, String(!!v)); else if (v === true) e.setAttribute(k, ''); else if (v !== false && v != null) e.setAttribute(k, v) } for (const c of kids.flat()) { if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(c)) } return e };
-const versionNode = version => el('span', { class: 'version-tag ' + (version === LATEST_VERSION ? 'current' : 'outdated') }, `v${version}`, el('span', { class: 'version-status' }, T(version === LATEST_VERSION ? 'latestVersion' : 'outdatedVersion')));
-let activePointerDrag = null, suppressDragClickUntil = 0;
+const versionNode = version => el('span', { class: 'version-tag ' + (version === LATEST_VERSION ? 'current' : 'outdated') }, `v${shownVersion(version)}`, el('span', { class: 'version-status' }, T(version === LATEST_VERSION ? 'latestVersion' : 'outdatedVersion')));
+let activePointerDrag = null, suppressDragClickUntil = 0, dragGhost = null;
+function endDragVisuals() {
+  if (dragGhost) { dragGhost.remove(); dragGhost = null }
+  document.body.classList.remove('drag-active');
+  document.querySelectorAll('.drop-target.drag-over').forEach(t => t.classList.remove('drag-over'));
+}
 document.addEventListener('pointermove', e => {
   if (!activePointerDrag || activePointerDrag.pointerId !== e.pointerId) return;
   if (Math.hypot(e.clientX - activePointerDrag.startX, e.clientY - activePointerDrag.startY) > 8) activePointerDrag.moved = true;
   if (activePointerDrag.moved) {
-    const overDrop = document.elementsFromPoint(e.clientX, e.clientY).some(element => element.closest('.drop-target'));
+    const under = document.elementsFromPoint(e.clientX, e.clientY).map(element => element.closest('.drop-target')).find(Boolean);
+    const overDrop = !!under;
+    if (!dragGhost) { dragGhost = el('div', { class: 'drag-ghost' }, activePointerDrag.text || ''); document.body.append(dragGhost); document.body.classList.add('drag-active') }
+    dragGhost.style.transform = `translate(${e.clientX + 12}px, ${e.clientY + 12}px)`;
+    document.querySelectorAll('.drop-target.drag-over').forEach(t => { if (t !== under) t.classList.remove('drag-over') });
+    if (under) under.classList.add('drag-over');
     if (!overDrop && e.clientY > window.innerHeight - 24) window.scrollBy(0, 12);
     else if (!overDrop && e.clientY < 24) window.scrollBy(0, -12);
   }
@@ -94,12 +109,13 @@ document.addEventListener('pointerup', e => {
   const drag = activePointerDrag;
   if (!drag || drag.pointerId !== e.pointerId) return;
   activePointerDrag = null;
+  endDragVisuals();
   if (!drag.moved) return;
   const target = document.elementsFromPoint(e.clientX, e.clientY).map(element => element.closest('.drop-target')).find(Boolean);
   if (target) drag.assign(target.dataset.row, drag.optionId, drag.origin);
   suppressDragClickUntil = Date.now() + 250;
 });
-document.addEventListener('pointercancel', e => { if (activePointerDrag && activePointerDrag.pointerId === e.pointerId) activePointerDrag = null });
+document.addEventListener('pointercancel', e => { if (activePointerDrag && activePointerDrag.pointerId === e.pointerId) { activePointerDrag = null; endDragVisuals() } });
 function versionGroup(version, choices, selected, prefix, onChange) {
   const buttons = choices.map(exam => {
     const key = examKey(version, exam);
@@ -206,7 +222,16 @@ function header(opts = {}) {
 }
 const storageWarn = () => storageOk ? null : el('div', { class: 'panel warn' }, T('storageErr'));
 
-function pool() { return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && (!cfg.onlyFailed || failed.has(d.id)) && (cfg.type === 'all' || cfg.type === questionType(d))) }
+function progressMap() {
+  const last = new Map();
+  [...attempts].sort((a, b) => a.startedAt - b.startedAt).forEach(a => Object.entries(a.answers || {}).forEach(([id, v]) => { if (byId.has(id) && v && typeof v.r === 'boolean') last.set(id, v.r) }));
+  failed.forEach(id => { if (byId.has(id)) last.set(id, false) });
+  let ok = 0, ko = 0;
+  QUESTION_DATA.forEach(d => { const r = last.get(d.id); if (r === true) ok++; else if (r === false) ko++ });
+  return { last, ok, ko, none: QUESTION_DATA.length - ok - ko };
+}
+const inScope = (scope, r) => scope === 'all' || (scope === 'failed' && r === false) || (scope === 'correct' && r === true) || (scope === 'answered' && r !== undefined) || (scope === 'none' && r === undefined);
+function pool() { const pm = progressMap(); return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && inScope(cfg.scope, pm.last.get(d.id)) && (cfg.type === 'all' || cfg.type === questionType(d))) }
 
 function renderSetup() {
   const p = pool();
@@ -216,6 +241,9 @@ function renderSetup() {
   const counts = [10, 25, 50, 100, 0].map(n => el('button', { class: 'chip', 'data-f': 'n' + n, 'aria-pressed': cfg.count === n, onclick: () => { cfg.count = n; refresh() } }, n === 0 ? T('all_') : String(n)));
   const modes = ['practice', 'exam'].map(m => el('button', { class: 'chip', 'data-f': 'm' + m, 'aria-pressed': cfg.mode === m, onclick: () => { cfg.mode = m; refresh() } }, T(m)));
   const types = [['all', 'typeAll'], ['mcq', 'typeMcq'], ['self', 'typeSelf'], ['interactive', 'typeInteractive']].map(([v, k]) => el('button', { class: 'chip', 'data-f': 't' + v, 'aria-pressed': cfg.type === v, onclick: () => { cfg.type = v; refresh() } }, T(k)));
+  const pm = progressMap();
+  const scopes = [['all', 'scopeAll', QUESTION_DATA.length], ['failed', 'scopeFailed', pm.ko], ['correct', 'scopeCorrect', pm.ok], ['answered', 'scopeAnswered', pm.ok + pm.ko], ['none', 'scopeNone', pm.none]].map(([v, k, n]) => el('button', { class: 'chip', 'data-f': 's' + v, 'aria-pressed': cfg.scope === v, onclick: () => { cfg.scope = v; refresh() } }, `${T(k)} (${n})`));
+  const stat = (cls, n, label) => el('div', { class: 'stat ' + cls }, el('strong', {}, String(n)), el('span', {}, label));
   const cb = (key, label, id) => el('label', { class: 'check', for: id }, el('input', { type: 'checkbox', id, checked: cfg[key], onchange: e => { cfg[key] = e.target.checked; refresh() } }), label);
   const resumable = sortedAttempts().find(a => a.status !== 'finished' && Object.keys(a.answers || {}).length > 0);
   mount(header(), storageWarn(),
@@ -226,10 +254,12 @@ function renderSetup() {
         versionGroup('1.0', V1_EXAMS, cfg.sel, 'e', refresh),
         versionGroup('2.0', V2_EXAMS, cfg.sel, 'e', refresh),
         window.EXAMS_V2_UNAVAILABLE ? el('p', { class: 'sub' }, T('v2Unavailable')) : null),
+      el('div', {}, el('div', { class: 'label' }, T('progress')), el('div', { class: 'stats' }, stat('good', pm.ok, T('statCorrect')), stat('bad', pm.ko, T('statWrong')), stat('', pm.none, T('statNone'))), el('p', { class: 'sub', style: 'margin-top:6px' }, T('progressNote'))),
+      el('div', {}, el('div', { class: 'label' }, T('scope')), el('div', { class: 'seg wrapseg', style: 'margin-top:8px' }, scopes)),
       el('div', {}, el('div', { class: 'label' }, T('type')), el('div', { class: 'seg', style: 'margin-top:8px' }, types)),
       el('div', {}, el('div', { class: 'label' }, T('count')), el('div', { class: 'seg', style: 'margin-top:8px' }, counts)),
       el('div', {}, el('div', { class: 'label' }, T('mode')), el('div', { class: 'seg', style: 'margin-top:8px' }, modes)),
-      el('div', { class: 'row' }, cb('shuffle', T('shuffle'), 'c1'), cb('shuffleOpts', T('shuffleOpts'), 'c2'), cb('onlyFailed', `${T('onlyFailed')} (${failed.size})`, 'c3')),
+      el('div', { class: 'row' }, cb('shuffle', T('shuffle'), 'c1'), cb('shuffleOpts', T('shuffleOpts'), 'c2')),
       el('div', { class: 'row' }, el('button', { class: 'btn', id: 'start', disabled: !p.length, onclick: start }, `${T('start')} · ${cfg.count && cfg.count < p.length ? cfg.count : p.length}`),
         failed.size ? el('button', { class: 'btn ghost small', onclick: () => { failed.clear(); saveFailed(); refresh() } }, T('reset')) : null),
       p.length ? null : el('p', { class: 'sub' }, T('noQ'))));
@@ -239,7 +269,7 @@ function start() {
   let p = pool(); if (cfg.shuffle) p = shuf(p); if (cfg.count && cfg.count < p.length) p = p.slice(0, cfg.count);
   const optsOrder = {};
   if (cfg.shuffleOpts) p.forEach(q => { if (q.opts && !q.opts.some(o => o.i)) optsOrder[q.id] = shuf(q.opts).map(o => o.k) });
-  const att = { id: uid(), startedAt: Date.now(), finishedAt: null, status: 'in-progress', mode: cfg.mode, type: cfg.type, sets: [...cfg.sel], onlyFailed: cfg.onlyFailed, qids: p.map(q => q.id), opts: optsOrder, answers: {} };
+  const att = { id: uid(), startedAt: Date.now(), finishedAt: null, status: 'in-progress', mode: cfg.mode, type: cfg.type, sets: [...cfg.sel], onlyFailed: cfg.scope === 'failed', scope: cfg.scope, qids: p.map(q => q.id), opts: optsOrder, answers: {} };
   attempts.push(att); persist();
   beginRun(att, 0);
 }
@@ -275,12 +305,15 @@ function stemNode(q) {
   return partsNode(it);
 }
 function optionsNode(q, sel, reveal, onpick) {
+  const full = q.multi && !reveal && sel.size >= q.ans.length;
   return el('div', { class: 'opts' }, q.opts.map((o, idx) => {
     let cls = 'opt';
+    const locked = full && !sel.has(o.k);
+    if (locked) cls += ' locked';
     if (sel.has(o.k)) cls += ' selected';
     if (reveal) { const c = q.ans.includes(o.k), s = sel.has(o.k); if (c && s) cls += ' good'; else if (s && !c) cls += ' bad'; else if (c) cls += ' missed' }
     return el('label', { class: cls },
-      el('input', { type: q.multi ? 'checkbox' : 'radio', name: `question-${q.id}`, value: o.k, checked: sel.has(o.k), disabled: reveal, 'data-f': 'o' + idx, onchange: () => onpick && onpick(o.k) }),
+      el('input', { type: q.multi ? 'checkbox' : 'radio', name: `question-${q.id}`, value: o.k, checked: sel.has(o.k), disabled: reveal || locked, 'data-f': 'o' + idx, onchange: () => onpick && onpick(o.k) }),
       el('span', { class: 'k' }, o.k), el('span', { class: 't' }, o.missing ? el('span', { class: 'miss' }, T('optMissing')) : o.t, (o.i || []).map(imgNode)));
   }));
 }
@@ -301,9 +334,9 @@ function interactionNode(q, sel, reveal, onpick, disabled = false) {
       onpick && onpick(rowId, optionId);
       keyboardChoice = null; keyboardOrigin = null;
     };
-    const pointerDown = (e, optionId, origin) => {
+    const pointerDown = (e, optionId, origin, text) => {
       if (disabled || reveal || e.button !== 0) return;
-      activePointerDrag = { pointerId: e.pointerId, optionId, origin, startX: e.clientX, startY: e.clientY, moved: false, assign: assignOption };
+      activePointerDrag = { pointerId: e.pointerId, optionId, origin, text, startX: e.clientX, startY: e.clientY, moved: false, assign: assignOption };
       try { e.currentTarget.setPointerCapture(e.pointerId) } catch (error) { }
     };
     const blocks = available.map(option => {
@@ -311,8 +344,8 @@ function interactionNode(q, sel, reveal, onpick, disabled = false) {
       return el('button', {
         class: 'drag-block' + (alreadyUsed ? ' used' : ''), type: 'button', disabled: disabled || reveal || alreadyUsed, 'aria-pressed': false,
         onclick: e => { if (Date.now() < suppressDragClickUntil || disabled || reveal) return; keyboardChoice = option.id; keyboardOrigin = null; pool.querySelectorAll('.drag-block').forEach(block => block.setAttribute('aria-pressed', 'false')); e.currentTarget.setAttribute('aria-pressed', 'true') },
-        onpointerdown: e => pointerDown(e, option.id, null)
-      }, option.text);
+        onpointerdown: e => pointerDown(e, option.id, null, option.text)
+      }, el('span', { class: 'grip', 'aria-hidden': 'true' }, '⠿'), option.text);
     });
     pool = el('div', { class: 'drag-pool' }, blocks);
     const rows = q.interaction.rows.map(row => {
@@ -320,14 +353,16 @@ function interactionNode(q, sel, reveal, onpick, disabled = false) {
       const slot = el('button', {
         class: 'drop-target' + (reveal ? (correct ? ' good' : ' bad') : ''), type: 'button', title: row.label, 'data-row': row.id,
         onclick: () => { if (Date.now() < suppressDragClickUntil || disabled || reveal) return; if (keyboardChoice) assignOption(row.id, keyboardChoice, keyboardOrigin); else if (value) { keyboardChoice = value; keyboardOrigin = row.id } },
-        onpointerdown: e => { if (value) pointerDown(e, value, row.id) }
-      }, choice ? choice.text : T('selectOne'));
+        onpointerdown: e => { if (value) pointerDown(e, value, row.id, choice && choice.text) }
+      }, choice ? choice.text : el('span', { class: 'placeholder' }, T('dropHere')));
+      const clear = value && !reveal && !disabled ? el('button', { class: 'slot-clear', type: 'button', title: T('clearAnswer'), 'aria-label': T('clearAnswer'), onclick: () => { if (Date.now() < suppressDragClickUntil) return; onpick && onpick(row.id, '') } }, '×') : null;
+      const slotWrap = el('div', { class: 'slot-wrap' }, slot, clear);
       const answer = options.get(row.answer);
       const feedback = reveal ? el('span', { class: 'question-result ' + (correct ? 'good' : 'bad') }, correct ? T('ok') : `${T('right')}: ${answer ? answer.text : ''}`) : null;
       return el('div', { class: 'question-row' + (reveal ? (correct ? ' good' : ' bad') : '') },
-        el('div', { class: 'question-label' }, row.label), slot, feedback);
+        el('div', { class: 'question-label' }, row.label), slotWrap, feedback);
     });
-    return el('div', { class: 'question-grid' }, pool, rows);
+    return el('div', { class: 'question-grid' }, disabled || reveal ? null : el('p', { class: 'sub dragtip' }, T('dragHint')), pool, rows);
   }
   if (q.interaction.type === 'boolean') return el('div', { class: 'question-grid' }, q.interaction.rows.map(row => {
     const id = `answer-${q.id}-${row.id}`, value = selected.get(row.id) || '', correct = value === row.answer;
@@ -365,6 +400,16 @@ function codeInteractionNode(q, sel, reveal, onpick, disabled = false) {
     select.value = value;
     return el('label', { class: 'code-slot', title: row.label }, select);
   }));
+}
+function refImagesNode(q, reveal) {
+  const v1 = q.sourceId && byId.get(q.sourceId);
+  if (!v1) return null;
+  const imgs = list => (list || []).filter(x => x.i).map(x => x.i);
+  const qi = imgs(v1.stem), si = imgs(v1.ex);
+  if (!qi.length && !si.length) return null;
+  return el('details', { class: 'refimg', open: refOpen, ontoggle: e => { refOpen = e.currentTarget.open; try { localStorage.setItem('pl400.refimg', refOpen ? '1' : '0') } catch (err) { } } },
+    el('summary', {}, T('refImage')),
+    el('div', { class: 'parts' }, qi.map(imgNode), reveal && si.length ? [el('div', { class: 'label' }, T('solImage')), si.map(imgNode)] : null));
 }
 function interactionAnswerNode(q, sel, reveal, onpick, disabled = false) {
   const answers = q.interaction.layout === 'code'
@@ -432,7 +477,7 @@ function renderQuiz() {
       if (run.mode === 'exam') record(q, run.i, isRight(q, sel));
       refresh();
     };
-    body = [stemNode(q), interactionAnswerNode(q, sel, reveal, pick)];
+    body = [stemNode(q), refImagesNode(q, reveal), interactionAnswerNode(q, sel, reveal, pick)];
     actions = run.mode === 'practice' && !reveal
       ? [el('button', { class: 'btn', id: 'check', disabled: !complete, onclick: () => { run.checked[run.i] = true; record(q, run.i, isRight(q, sel)); refresh() } }, T('check'))]
       : [el('button', { class: 'btn', id: 'next', onclick: advance }, last ? T('finish') : T('next'))];
@@ -440,7 +485,7 @@ function renderQuiz() {
     const reveal = revealed && run.mode === 'practice';
     const ok = isRight(q, sel);
     const pick = k => {
-      if (q.multi) { if (sel.has(k)) sel.delete(k); else sel.add(k) } else { sel.clear(); sel.add(k) }
+      if (q.multi) { if (sel.has(k)) sel.delete(k); else if (sel.size < q.ans.length) sel.add(k); else return } else { sel.clear(); sel.add(k) }
       if (run.mode === 'exam') record(q, run.i, isRight(q, sel));
       refresh();
     };
@@ -448,7 +493,7 @@ function renderQuiz() {
       el('div', { class: 'verdict ' + (ok ? 'good' : 'bad') }, ok ? T('ok') : T('ko')),
       el('div', { class: 'sub' }, `${T('right')}: `, el('span', { class: 'mono' }, q.ans.split('').join(', '))),
       q.ex.length ? partsNode(q.ex) : null) : null;
-    body = [stemNode(q), el('div', { class: 'tag' }, q.multi ? T('selectMany') : T('selectOne')), optionsNode(q, sel, reveal, pick), fb];
+    body = [stemNode(q), el('div', { class: 'tag' }, q.multi ? T('selectUpTo').replace('{n}', q.ans.length) : T('selectOne')), optionsNode(q, sel, reveal, pick), fb];
     actions = run.mode === 'practice' && !reveal
       ? [el('button', { class: 'btn', id: 'check', disabled: !sel.size, onclick: () => { run.checked[run.i] = true; record(q, run.i, isRight(q, sel)); refresh() } }, T('check'))]
       : [el('button', { class: 'btn', id: 'next', onclick: advance }, last ? T('finish') : T('next'))];
@@ -461,7 +506,7 @@ function renderQuiz() {
   if (!hasNext && last) skip.push(el('button', { class: 'btn ghost', onclick: finish }, T('finish')));
   mount(header({ minimal: true }),
     el('div', { class: 'bar' }, el('i', { style: `width:${(run.i + 1) / n * 100}%` })),
-    el('div', { class: 'meta' }, el('span', { class: 'mono' }, `${T('q')} ${run.i + 1} ${T('of')} ${n} · ${q.version} · ${q.exam} · ${q.id}`),
+    el('div', { class: 'meta' }, el('span', { class: 'mono' }, `${T('q')} ${run.i + 1} ${T('of')} ${n} · ${shownVersion(q.version)} · ${q.exam} · ${q.id}`),
       el('button', { class: 'tgl', id: 'exit', onclick: () => { exitOpen = !exitOpen; refresh() } }, T('exit'))),
     exitOpen ? exitPanel() : null,
     el('div', { class: 'panel' }, flagsNode(q), body),
@@ -494,7 +539,7 @@ function renderAttempt() {
     el('div', { class: 'bar' }, el('i', { style: `width:${st.pct}%` })),
     el('div', { class: 'row' }, backBtn,
       att.status !== 'finished' ? el('button', { class: 'btn', id: 'res', onclick: () => resumeAttempt(att) }, T('resume')) : null,
-      viewFrom === 'finish' && failed.size ? el('button', { class: 'btn ghost', onclick: () => { cfg.onlyFailed = true; cfg.count = 0; cfg.type = 'all'; start() } }, `${T('retry')} (${failed.size})`) : null,
+      viewFrom === 'finish' && failed.size ? el('button', { class: 'btn ghost', onclick: () => { cfg.scope = 'failed'; cfg.count = 0; cfg.type = 'all'; start() } }, `${T('retry')} (${failed.size})`) : null,
       viewFrom === 'finish' ? el('button', { class: 'btn ghost', onclick: () => { viewFrom = 'history'; view = 'history'; render() } }, T('history')) : null)),
     el('div', { class: 'panel' },
       el('div', { class: 'row', style: 'justify-content:space-between' }, el('h2', {}, T('review')),
@@ -504,7 +549,7 @@ function renderAttempt() {
       el('div', { class: 'rev' }, items.map(({ q, s, r }) => {
         const legacy = isLegacySelfAnswer(q, s), displayQ = legacy ? legacyQuestion(q) : q;
         return el('div', { class: 'item' },
-          el('div', { class: 'tag' }, `${q.version} · ${q.exam} · ${q.id} · `, el('span', { class: 'verdict ' + (r ? 'good' : 'bad') }, s.size ? (r ? T('ok') : T('ko')) : T('unans'))),
+          el('div', { class: 'tag' }, `${shownVersion(q.version)} · ${q.exam} · ${q.id} · `, el('span', { class: 'verdict ' + (r ? 'good' : 'bad') }, s.size ? (r ? T('ok') : T('ko')) : T('unans'))),
           flagsNode(q), stemNode(displayQ),
           q.interaction && !legacy ? interactionAnswerNode(q, s, true, null, true) : q.self || legacy ? solutionNode(displayQ) : optionsNode(q, s, true),
           !q.interaction && !q.self && q.ex.length ? partsNode(q.ex) : null);

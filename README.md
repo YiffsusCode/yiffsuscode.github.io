@@ -2,7 +2,7 @@
 
 ![Static web app](https://img.shields.io/badge/app-static%20web-0b6e79)
 ![Offline ready](https://img.shields.io/badge/offline-service%20worker-12703a)
-![Exam data](https://img.shields.io/badge/exams-1.0%20%2B%202.0-335c67)
+![Exam data](https://img.shields.io/badge/exams-1.0%20%2B%202.1-335c67)
 
 Banco de práctica PL-400 para navegador, móvil y uso sin conexión. No requiere backend ni Node para ejecutarse.
 
@@ -10,7 +10,7 @@ Banco de práctica PL-400 para navegador, móvil y uso sin conexión. No requier
 
 - Modo práctica con corrección inmediata y modo examen con corrección al finalizar.
 - Historial local, reanudación, comparación y exportación/importación JSON.
-- Preguntas 1.0 originales y preguntas 2.0 con controles interactivos.
+- Preguntas 1.0 originales y preguntas 2.1 con controles interactivos.
 - Aplicación estática con caché offline mediante service worker.
 
 ## Uso

@@ -439,59 +439,94 @@
         "type": "select-grid",
         "rows": [
           {
-            "id": "hierarchy-relationship",
-            "label": "Visualize records as a hierarchy in a model-driven app.",
-            "answer": "self-referential-relationship",
+            "id": "edit-accounts",
+            "label": "Privilege provided to edit accounts.",
+            "answer": "security-role",
             "options": [
               {
-                "id": "self-referential-relationship",
-                "text": "self-referential relationship"
+                "id": "security-role",
+                "text": "Security role"
               },
               {
-                "id": "one-to-many-relationship",
-                "text": "one-to-many relationship"
+                "id": "business-unit",
+                "text": "Business unit"
               },
               {
-                "id": "many-to-many-relationship",
-                "text": "many-to-many relationship"
+                "id": "microsoft-entra-id-role",
+                "text": "Microsoft Entra ID role"
+              },
+              {
+                "id": "field-security-profile",
+                "text": "Field security profile"
               }
             ]
           },
           {
-            "id": "single-related-record",
-            "label": "Records in one entity must be able to reference only a single record in another entity.",
-            "answer": "one-to-many-relationship",
+            "id": "account-table-access",
+            "label": "Access level for the Account table.",
+            "answer": "business-unit-update",
             "options": [
               {
-                "id": "self-referential-relationship",
-                "text": "self-referential relationship"
+                "id": "user-create",
+                "text": "User Create"
               },
               {
-                "id": "one-to-many-relationship",
-                "text": "one-to-many relationship"
+                "id": "user-update",
+                "text": "User Update"
               },
               {
-                "id": "many-to-many-relationship",
-                "text": "many-to-many relationship"
+                "id": "business-unit-create",
+                "text": "Business Unit Create"
+              },
+              {
+                "id": "business-unit-update",
+                "text": "Business Unit Update"
               }
             ]
           },
           {
-            "id": "multiple-related-records",
-            "label": "Any record in one entity must be able to be referenced by any record in another entity.",
-            "answer": "many-to-many-relationship",
+            "id": "notes-table-access",
+            "label": "Access level for the Notes table.",
+            "answer": "user-append",
             "options": [
               {
-                "id": "self-referential-relationship",
-                "text": "self-referential relationship"
+                "id": "user-append",
+                "text": "User Append"
               },
               {
-                "id": "one-to-many-relationship",
-                "text": "one-to-many relationship"
+                "id": "user-append-to",
+                "text": "User Append To"
               },
               {
-                "id": "many-to-many-relationship",
-                "text": "many-to-many relationship"
+                "id": "business-unit-append",
+                "text": "Business Unit Append"
+              },
+              {
+                "id": "business-unit-append-to",
+                "text": "Business Unit Append To"
+              }
+            ]
+          },
+          {
+            "id": "team-type",
+            "label": "Team type to assign privileges to.",
+            "answer": "microsoft-entra-id-office-group",
+            "options": [
+              {
+                "id": "access",
+                "text": "Access"
+              },
+              {
+                "id": "owner",
+                "text": "Owner"
+              },
+              {
+                "id": "microsoft-entra-id-office-group",
+                "text": "Microsoft Entra ID Office Group"
+              },
+              {
+                "id": "microsoft-entra-id-security-group",
+                "text": "Microsoft Entra ID Security Group"
               }
             ]
           }
@@ -570,7 +605,7 @@
             ]
           }
         ],
-        "reuse": "once"
+        "reuse": "multiple"
       }
     },
     {
@@ -1729,94 +1764,59 @@
         "type": "assign",
         "rows": [
           {
-            "id": "edit-accounts",
-            "label": "Privilege provided to edit accounts.",
-            "answer": "security-role",
+            "id": "view-business-unit-records",
+            "label": "Sales managers must be able to view the records of the salespeople in their business unit.",
+            "answer": "role-based-security",
             "options": [
               {
-                "id": "security-role",
-                "text": "Security role"
+                "id": "role-based-security",
+                "text": "Role-based security"
               },
               {
-                "id": "business-unit",
-                "text": "Business unit"
+                "id": "field-level-security",
+                "text": "Field-level security"
               },
               {
-                "id": "microsoft-entra-id-role",
-                "text": "Microsoft Entra ID role"
-              },
-              {
-                "id": "field-security-profile",
-                "text": "Field security profile"
+                "id": "record-level-security",
+                "text": "Record-level security"
               }
             ]
           },
           {
-            "id": "account-table-access",
-            "label": "Access level for the Account table.",
-            "answer": "business-unit-update",
+            "id": "probability-data",
+            "label": "Sales managers must be the only people who can view sales probability data in opportunity records.",
+            "answer": "field-level-security",
             "options": [
               {
-                "id": "user-create",
-                "text": "User Create"
+                "id": "role-based-security",
+                "text": "Role-based security"
               },
               {
-                "id": "user-update",
-                "text": "User Update"
+                "id": "field-level-security",
+                "text": "Field-level security"
               },
               {
-                "id": "business-unit-create",
-                "text": "Business Unit Create"
-              },
-              {
-                "id": "business-unit-update",
-                "text": "Business Unit Update"
+                "id": "record-level-security",
+                "text": "Record-level security"
               }
             ]
           },
           {
-            "id": "notes-table-access",
-            "label": "Access level for the Notes table.",
-            "answer": "user-append",
+            "id": "shared-territory-access",
+            "label": "Sales representatives and new hires assigned to the same territory share access to sales records.",
+            "answer": "record-level-security",
             "options": [
               {
-                "id": "user-append",
-                "text": "User Append"
+                "id": "role-based-security",
+                "text": "Role-based security"
               },
               {
-                "id": "user-append-to",
-                "text": "User Append To"
+                "id": "field-level-security",
+                "text": "Field-level security"
               },
               {
-                "id": "business-unit-append",
-                "text": "Business Unit Append"
-              },
-              {
-                "id": "business-unit-append-to",
-                "text": "Business Unit Append To"
-              }
-            ]
-          },
-          {
-            "id": "team-type",
-            "label": "Team type to assign privileges to.",
-            "answer": "microsoft-entra-id-office-group",
-            "options": [
-              {
-                "id": "access",
-                "text": "Access"
-              },
-              {
-                "id": "owner",
-                "text": "Owner"
-              },
-              {
-                "id": "microsoft-entra-id-office-group",
-                "text": "Microsoft Entra ID Office Group"
-              },
-              {
-                "id": "microsoft-entra-id-security-group",
-                "text": "Microsoft Entra ID Security Group"
+                "id": "record-level-security",
+                "text": "Record-level security"
               }
             ]
           }

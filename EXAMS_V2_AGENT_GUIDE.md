@@ -34,7 +34,7 @@ Keep `sourceId` equal to the original question ID. Prefix the runtime `id` with 
 Use the smallest control that matches the original exercise:
 
 - Ordinary single-answer choice: `opts`, `ans`, `multi: false`; the app renders radio inputs.
-- Ordinary multi-answer choice: `opts`, `ans`, `multi: true`; the app renders checkboxes and permits selecting every option.
+- Ordinary multi-answer choice: `opts`, `ans`, `multi: true`; the app renders checkboxes and allows selecting at most as many options as `ans` has letters.
 - `select-grid`: one dropdown per row. Each row has a stable `id`, visible `label`, `options` with stable IDs/text, and one `answer` ID.
 - `boolean`: one Yes/No radio group per row.
 - `assign`: drag blocks to named targets. Set `reuse: "once"` when an option disappears from the source list after placement; set `reuse: "multiple"` when the source image/instructions allow an option to be used more than once. Used one-time blocks remain visible in place, dimmed and disabled.
@@ -80,3 +80,8 @@ For each migrated exam:
 - Do not edit unrelated exams or refactor the 1.0 bank during a single-exam migration.
 - Do not delete 1.0 until all exams are migrated, answer/history compatibility is verified, and removal is explicitly scheduled in the roadmap.
 - Do not edit generated `exams-v2.bundle.js` by hand; always rebuild it from JSON.
+
+
+## Reference images
+
+Interactive v2 questions keep their original question and solution images through `sourceId`: the app looks up the matching v1.0 record and shows its `stem`/`ex` images in a collapsible "original image" block. Never delete images from `img/` or the v1.0 data, and keep `sourceId` correct.

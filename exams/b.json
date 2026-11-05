@@ -145,7 +145,7 @@
       "version": "2.0",
       "interaction": {
         "type": "assign",
-        "reuse": "multiple",
+        "reuse": "once",
         "rows": [
           {
             "id": "calculate-payments",

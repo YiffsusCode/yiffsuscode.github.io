@@ -506,7 +506,7 @@
             ]
           }
         ],
-        "reuse": "once"
+        "reuse": "multiple"
       }
     },
     {
