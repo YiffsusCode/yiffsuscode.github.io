@@ -24,8 +24,8 @@ I18N.es.kindInteractive = 'Controles interactivos';
 I18N.en.kindInteractive = 'Interactive controls';
 I18N.es.selectMany = 'Selecciona todas las que correspondan';
 I18N.en.selectMany = 'Select all that apply';
-Object.assign(I18N.es, { typeYesNo: 'Sí / No', ynFilter: 'Respuesta correcta', ynBoth: 'Ambas', ynYes: 'Sí', ynNo: 'No', ynStats: 'Afirmaciones con respuesta Sí: {y} · No: {n} · Preguntas: {q}', ynNote: 'Se incluyen las preguntas con al menos una afirmación con esa respuesta.', searchAnswers: 'Buscar solo en el texto de las respuestas', ocrAnswer: 'Texto de la respuesta (leído de la imagen, puede contener errores)', selectUpTo: 'Selecciona {n} (máximo)', clearAnswer: 'Quitar respuesta', dropHere: 'Suelta aquí', dragHint: 'Arrastra una opción hasta su hueco, o toca una opción y luego el hueco. Usa × para quitar una respuesta.', refImage: 'Ver imagen original', solImage: 'Imagen de la solución original', progress: 'Tu progreso', statCorrect: 'Acertadas', statWrong: 'Falladas', statNone: 'Sin responder', scope: 'Qué preguntas incluir', scopeAll: 'Todas', scopeFailed: 'Falladas', scopeCorrect: 'Acertadas', scopeAnswered: 'Acertadas + falladas', scopeNone: 'Sin responder', progressNote: 'Según tu último resultado en cada pregunta.' });
-Object.assign(I18N.en, { typeYesNo: 'Yes / No', ynFilter: 'Correct answer', ynBoth: 'Both', ynYes: 'Yes', ynNo: 'No', ynStats: 'Statements answered Yes: {y} · No: {n} · Questions: {q}', ynNote: 'Includes questions with at least one statement having that answer.', searchAnswers: 'Search only in the answer text', ocrAnswer: 'Answer text (read from the image, may contain errors)', selectUpTo: 'Select {n} (maximum)', clearAnswer: 'Clear answer', dropHere: 'Drop here', dragHint: 'Drag an option onto its slot, or tap an option and then the slot. Use × to clear an answer.', refImage: 'Show original image', solImage: 'Original solution image', progress: 'Your progress', statCorrect: 'Correct', statWrong: 'Wrong', statNone: 'Unanswered', scope: 'Which questions to include', scopeAll: 'All', scopeFailed: 'Wrong', scopeCorrect: 'Correct', scopeAnswered: 'Correct + wrong', scopeNone: 'Unanswered', progressNote: 'Based on your latest result for each question.' });
+Object.assign(I18N.es, { pdfIssueBadge: 'Error del PDF', pdfIssueNote: 'Pregunta con datos incompletos por un error del PDF de origen: falta el texto de alguna opción (se muestra como no disponible). Conviene obviarla hasta que se corrija.', skipIssues: 'Excluir preguntas con error del PDF', omittedTitle: 'Preguntas omitidas del banco', omittedNote: 'No están en la app porque el PDF de origen las dejó sin enunciado o sin la opción correcta. Hasta que se corrijan, no hay que estudiarlas desde aquí.', omReasonNoStem: 'sin enunciado en el PDF', omReasonNoAnswer: 'la opción correcta (A) falta en el PDF', typeYesNo: 'Sí / No', ynFilter: 'Respuesta correcta', ynBoth: 'Ambas', ynYes: 'Sí', ynNo: 'No', ynStats: 'Afirmaciones con respuesta Sí: {y} · No: {n} · Preguntas: {q}', ynNote: 'Se incluyen las preguntas con al menos una afirmación con esa respuesta.', searchAnswers: 'Buscar solo en el texto de las respuestas', ocrAnswer: 'Texto de la respuesta (leído de la imagen, puede contener errores)', selectUpTo: 'Selecciona {n} (máximo)', clearAnswer: 'Quitar respuesta', dropHere: 'Suelta aquí', dragHint: 'Arrastra una opción hasta su hueco, o toca una opción y luego el hueco. Usa × para quitar una respuesta.', refImage: 'Ver imagen original', solImage: 'Imagen de la solución original', progress: 'Tu progreso', statCorrect: 'Acertadas', statWrong: 'Falladas', statNone: 'Sin responder', scope: 'Qué preguntas incluir', scopeAll: 'Todas', scopeFailed: 'Falladas', scopeCorrect: 'Acertadas', scopeAnswered: 'Acertadas + falladas', scopeNone: 'Sin responder', progressNote: 'Según tu último resultado en cada pregunta.' });
+Object.assign(I18N.en, { pdfIssueBadge: 'PDF error', pdfIssueNote: 'Question with incomplete data caused by an error in the source PDF: some option text is missing (shown as unavailable). Best to skip it until it is fixed.', skipIssues: 'Exclude questions with PDF errors', omittedTitle: 'Questions omitted from the bank', omittedNote: 'They are not in the app because the source PDF left them without a stem or without the correct option. Do not study them from here until they are fixed.', omReasonNoStem: 'no stem in the PDF', omReasonNoAnswer: 'the correct option (A) is missing from the PDF', typeYesNo: 'Yes / No', ynFilter: 'Correct answer', ynBoth: 'Both', ynYes: 'Yes', ynNo: 'No', ynStats: 'Statements answered Yes: {y} · No: {n} · Questions: {q}', ynNote: 'Includes questions with at least one statement having that answer.', searchAnswers: 'Search only in the answer text', ocrAnswer: 'Answer text (read from the image, may contain errors)', selectUpTo: 'Select {n} (maximum)', clearAnswer: 'Clear answer', dropHere: 'Drop here', dragHint: 'Drag an option onto its slot, or tap an option and then the slot. Use × to clear an answer.', refImage: 'Show original image', solImage: 'Original solution image', progress: 'Your progress', statCorrect: 'Correct', statWrong: 'Wrong', statNone: 'Unanswered', scope: 'Which questions to include', scopeAll: 'All', scopeFailed: 'Wrong', scopeCorrect: 'Correct', scopeAnswered: 'Correct + wrong', scopeNone: 'Unanswered', progressNote: 'Based on your latest result for each question.' });
 I18N.es.version1 = 'Versión 1.0 · Originales';
 I18N.en.version1 = 'Version 1.0 · Original';
 I18N.es.version2 = 'Versión 2.1 · Migrados';
@@ -71,7 +71,7 @@ const byId = new Map(QUESTION_DATA.map(d => [d.id, d]));
 const V1_EXAMS = [...new Set(DATA.map(d => d.exam))].sort();
 const V2_EXAMS = [...new Set(V2_DATA.map(d => d.exam))].sort();
 const examKey = (version, exam) => `${version}:${exam}`;
-const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, scope: 'all', yn: 'both' };
+const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, scope: 'all', yn: 'both', skipIssues: true };
 let refOpen = false;
 try { refOpen = localStorage.getItem('pl400.refimg') === '1' } catch (e) { }
 let view = 'setup', run = null, viewAtt = null, viewFrom = 'history', wrongOnly = true;
@@ -202,12 +202,17 @@ const isRight = (q, s) => {
   }
   return q.self ? s.has('OK') : (s.size === q.ans.length && [...s].every(k => q.ans.includes(k)));
 };
+const OMITTED = [['B-18', 'omReasonNoAnswer'], ['V-16', 'omReasonNoAnswer'], ['E-8', 'omReasonNoStem'], ['E-9', 'omReasonNoStem'], ['E-10', 'omReasonNoStem'], ['N-2', 'omReasonNoStem']];
+const hasPdfIssue = q => !!(q.opts && q.opts.some(o => o.missing));
+const omittedNode = () => el('details', { class: 'omitted' }, el('summary', {}, `${T('omittedTitle')} (${OMITTED.length})`), el('p', { class: 'sub' }, T('omittedNote')), el('ul', {}, OMITTED.map(([id, k]) => el('li', {}, el('strong', {}, id), ` — ${T(k)}`))));
 const flagsNode = q => {
   const items = [];
   if (q.kind) items.push(el('span', { class: 'badge' }, T(q.kind === 'interactive' ? 'kindInteractive' : q.kind === 'hotspot' ? 'kindHotspot' : q.kind === 'dragdrop' ? 'kindDragdrop' : 'kindImage')));
   if (q.flag === 'ok') items.push(el('span', { class: 'badge keptOk' }, T('flagOk')));
   if (q.flag === 'doubt') items.push(el('span', { class: 'badge regressed' }, T('flagDoubt')));
-  return items.length ? el('div', { class: 'flags' }, items) : null;
+  if (hasPdfIssue(q)) items.push(el('span', { class: 'badge regressed' }, T('pdfIssueBadge')));
+  const flags = items.length ? el('div', { class: 'flags' }, items) : null;
+  return hasPdfIssue(q) ? el('div', { class: 'flagwrap' }, flags, el('div', { class: 'pdfnote' }, T('pdfIssueNote'))) : flags;
 };
 const shortText = q => { const texts = q.stem.filter(x => x.t); const long = texts.reduce((n, x) => n + x.t.length, 0) > 1200; const t = long ? texts[texts.length - 1] : texts[0]; const s = t ? t.t : ''; return s.length > 150 ? s.slice(0, 147) + '...' : s };
 
@@ -272,7 +277,7 @@ function progressMap() {
   return { last, ok, ko, none: QUESTION_DATA.length - ok - ko };
 }
 const inScope = (scope, r) => scope === 'all' || (scope === 'failed' && r === false) || (scope === 'correct' && r === true) || (scope === 'answered' && r !== undefined) || (scope === 'none' && r === undefined);
-function pool() { const pm = progressMap(); return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && inScope(cfg.scope, pm.last.get(d.id)) && typeMatch(d, cfg.type, cfg.yn)) }
+function pool() { const pm = progressMap(); return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && inScope(cfg.scope, pm.last.get(d.id)) && typeMatch(d, cfg.type, cfg.yn) && !(cfg.skipIssues && hasPdfIssue(d))) }
 
 function renderSetup() {
   const p = pool();
@@ -290,6 +295,7 @@ function renderSetup() {
   mount(header(), storageWarn(),
     resumable ? el('div', { class: 'panel resume' }, el('div', {}, el('strong', {}, `${T('attempt')} #${rankOf(resumable)} · ${statusLabel(resumable.status)}`), el('div', { class: 'sub' }, `${Object.keys(resumable.answers).length}/${resumable.qids.length} ${T('answeredOf')} · ${fmtDate(resumable.startedAt)}`)), el('button', { class: 'btn', id: 'resume', onclick: () => resumeAttempt(resumable) }, T('resume'))) : null,
     el('div', { class: 'panel' },
+      omittedNode(),
       el('div', { class: 'row' }, el('span', { class: 'mono' }, `${QUESTION_DATA.length}`), el('span', { class: 'sub' }, `${T('avail')} (${nMcq} ${T('typeMcq').toLowerCase()} · ${nSelf} ${T('typeSelf').toLowerCase()} · ${nInteractive} ${T('typeInteractive').toLowerCase()})`)),
       el('div', { class: 'panel' },
         versionGroup('1.0', V1_EXAMS, cfg.sel, 'e', refresh),
@@ -300,7 +306,7 @@ function renderSetup() {
       el('div', {}, el('div', { class: 'label' }, T('type')), el('div', { class: 'seg', style: 'margin-top:8px' }, types), cfg.type === 'yesno' ? ynPanel(cfg, QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam))), refresh) : null),
       el('div', {}, el('div', { class: 'label' }, T('count')), el('div', { class: 'seg', style: 'margin-top:8px' }, counts)),
       el('div', {}, el('div', { class: 'label' }, T('mode')), el('div', { class: 'seg', style: 'margin-top:8px' }, modes)),
-      el('div', { class: 'row' }, cb('shuffle', T('shuffle'), 'c1'), cb('shuffleOpts', T('shuffleOpts'), 'c2')),
+      el('div', { class: 'row' }, cb('skipIssues', `${T('skipIssues')} (${QUESTION_DATA.filter(hasPdfIssue).length})`, 'c4'), cb('shuffle', T('shuffle'), 'c1'), cb('shuffleOpts', T('shuffleOpts'), 'c2')),
       el('div', { class: 'row' }, el('button', { class: 'btn', id: 'start', disabled: !p.length, onclick: start }, `${T('start')} · ${cfg.count && cfg.count < p.length ? cfg.count : p.length}`),
         failed.size ? el('button', { class: 'btn ghost small', onclick: () => { failed.clear(); saveFailed(); refresh() } }, T('reset')) : null),
       p.length ? null : el('p', { class: 'sub' }, T('noQ'))));
@@ -750,6 +756,7 @@ function renderBank() {
     el('div', { class: 'row' }, el('button', { class: 'btn ghost', id: 'back', onclick: () => { view = 'setup'; render() } }, T('back'))),
     el('div', { class: 'panel' },
       el('h2', {}, T('bankTitle')),
+      omittedNode(),
       input,
       el('label', { class: 'check', for: 'bans' }, el('input', { type: 'checkbox', id: 'bans', checked: bankState.ansOnly, onchange: e => { bankState.ansOnly = e.target.checked; bankState.limit = 40; refresh() } }), T('searchAnswers')),
       versionGroup('1.0', V1_EXAMS, bankState.exams, 'be', onExamChange),
