@@ -1025,3 +1025,10 @@ body.drag-active .drop-target{border-style:solid}
 .stat.bad strong{color:var(--bad)}
 .seg.wrapseg{flex-wrap:wrap;gap:6px}
 .seg.wrapseg .chip{border-radius:6px;margin-left:0}
+
+.ynpanel{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.ynpanel .row{gap:16px;flex-wrap:wrap}
+.ynstats{margin:8px 0 0;font-family:var(--font-mono)}
+.anstext{border:1px solid var(--line);border-radius:6px;padding:8px 12px;background:var(--surface)}
+.anstext summary{cursor:pointer;font-weight:600}
+.anstext ul{margin:8px 0 0;padding-left:18px}

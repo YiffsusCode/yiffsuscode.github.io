@@ -24,8 +24,8 @@ I18N.es.kindInteractive = 'Controles interactivos';
 I18N.en.kindInteractive = 'Interactive controls';
 I18N.es.selectMany = 'Selecciona todas las que correspondan';
 I18N.en.selectMany = 'Select all that apply';
-Object.assign(I18N.es, { selectUpTo: 'Selecciona {n} (máximo)', clearAnswer: 'Quitar respuesta', dropHere: 'Suelta aquí', dragHint: 'Arrastra una opción hasta su hueco, o toca una opción y luego el hueco. Usa × para quitar una respuesta.', refImage: 'Ver imagen original', solImage: 'Imagen de la solución original', progress: 'Tu progreso', statCorrect: 'Acertadas', statWrong: 'Falladas', statNone: 'Sin responder', scope: 'Qué preguntas incluir', scopeAll: 'Todas', scopeFailed: 'Falladas', scopeCorrect: 'Acertadas', scopeAnswered: 'Acertadas + falladas', scopeNone: 'Sin responder', progressNote: 'Según tu último resultado en cada pregunta.' });
-Object.assign(I18N.en, { selectUpTo: 'Select {n} (maximum)', clearAnswer: 'Clear answer', dropHere: 'Drop here', dragHint: 'Drag an option onto its slot, or tap an option and then the slot. Use × to clear an answer.', refImage: 'Show original image', solImage: 'Original solution image', progress: 'Your progress', statCorrect: 'Correct', statWrong: 'Wrong', statNone: 'Unanswered', scope: 'Which questions to include', scopeAll: 'All', scopeFailed: 'Wrong', scopeCorrect: 'Correct', scopeAnswered: 'Correct + wrong', scopeNone: 'Unanswered', progressNote: 'Based on your latest result for each question.' });
+Object.assign(I18N.es, { typeYesNo: 'Sí / No', ynFilter: 'Respuesta correcta', ynBoth: 'Ambas', ynYes: 'Sí', ynNo: 'No', ynStats: 'Afirmaciones con respuesta Sí: {y} · No: {n} · Preguntas: {q}', ynNote: 'Se incluyen las preguntas con al menos una afirmación con esa respuesta.', searchAnswers: 'Buscar solo en el texto de las respuestas', ocrAnswer: 'Texto de la respuesta (leído de la imagen, puede contener errores)', selectUpTo: 'Selecciona {n} (máximo)', clearAnswer: 'Quitar respuesta', dropHere: 'Suelta aquí', dragHint: 'Arrastra una opción hasta su hueco, o toca una opción y luego el hueco. Usa × para quitar una respuesta.', refImage: 'Ver imagen original', solImage: 'Imagen de la solución original', progress: 'Tu progreso', statCorrect: 'Acertadas', statWrong: 'Falladas', statNone: 'Sin responder', scope: 'Qué preguntas incluir', scopeAll: 'Todas', scopeFailed: 'Falladas', scopeCorrect: 'Acertadas', scopeAnswered: 'Acertadas + falladas', scopeNone: 'Sin responder', progressNote: 'Según tu último resultado en cada pregunta.' });
+Object.assign(I18N.en, { typeYesNo: 'Yes / No', ynFilter: 'Correct answer', ynBoth: 'Both', ynYes: 'Yes', ynNo: 'No', ynStats: 'Statements answered Yes: {y} · No: {n} · Questions: {q}', ynNote: 'Includes questions with at least one statement having that answer.', searchAnswers: 'Search only in the answer text', ocrAnswer: 'Answer text (read from the image, may contain errors)', selectUpTo: 'Select {n} (maximum)', clearAnswer: 'Clear answer', dropHere: 'Drop here', dragHint: 'Drag an option onto its slot, or tap an option and then the slot. Use × to clear an answer.', refImage: 'Show original image', solImage: 'Original solution image', progress: 'Your progress', statCorrect: 'Correct', statWrong: 'Wrong', statNone: 'Unanswered', scope: 'Which questions to include', scopeAll: 'All', scopeFailed: 'Wrong', scopeCorrect: 'Correct', scopeAnswered: 'Correct + wrong', scopeNone: 'Unanswered', progressNote: 'Based on your latest result for each question.' });
 I18N.es.version1 = 'Versión 1.0 · Originales';
 I18N.en.version1 = 'Version 1.0 · Original';
 I18N.es.version2 = 'Versión 2.1 · Migrados';
@@ -71,13 +71,13 @@ const byId = new Map(QUESTION_DATA.map(d => [d.id, d]));
 const V1_EXAMS = [...new Set(DATA.map(d => d.exam))].sort();
 const V2_EXAMS = [...new Set(V2_DATA.map(d => d.exam))].sort();
 const examKey = (version, exam) => `${version}:${exam}`;
-const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, scope: 'all' };
+const cfg = { sel: new Set(V1_EXAMS.map(exam => examKey('1.0', exam))), count: 25, mode: 'practice', type: 'all', shuffle: true, shuffleOpts: false, scope: 'all', yn: 'both' };
 let refOpen = false;
 try { refOpen = localStorage.getItem('pl400.refimg') === '1' } catch (e) { }
 let view = 'setup', run = null, viewAtt = null, viewFrom = 'history', wrongOnly = true;
 let histSel = [], delConfirm = null, exitOpen = false, clearConfirm = false;
 let cmpFilter = 'all', ioMsg = '', ioText = '';
-const bankState = { exams: new Set([...V1_EXAMS.map(exam => examKey('1.0', exam)), ...V2_EXAMS.map(exam => examKey('2.0', exam))]), q: '', type: 'all', limit: 40 };
+const bankState = { exams: new Set([...V1_EXAMS.map(exam => examKey('1.0', exam)), ...V2_EXAMS.map(exam => examKey('2.0', exam))]), q: '', type: 'all', yn: 'both', ansOnly: false, limit: 40 };
 const APP_VERSION = '2.0', LATEST_VERSION = '2.0';
 const shownVersion = v => v === '2.0' ? '2.1' : v;
 const app = document.getElementById('app');
@@ -153,6 +153,47 @@ const partsNode = items => el('div', { class: 'parts' }, items.map(it => it.i ? 
 const isLegacySelfAnswer = (q, s) => !!q.legacySelf && (s.has('OK') || s.has('KO'));
 const legacyQuestion = q => ({ ...q, stem: q.legacyStem || q.stem, ex: q.legacyEx || q.ex, ansText: q.legacyAnsText || q.ansText });
 const questionType = q => q.interaction ? 'interactive' : q.self ? 'self' : 'mcq';
+const ANSWER_INDEX = window.ANSWER_INDEX || {};
+const answerCache = new Map();
+function answerItems(q) {
+  if (answerCache.has(q.id)) return answerCache.get(q.id);
+  let items = [];
+  if (q.interaction) items = q.interaction.rows.map(r => ({ l: r.label, a: (r.options.find(o => o.id === r.answer) || {}).text || r.answer }));
+  else if (q.self) {
+    const e = ANSWER_INDEX[q.id];
+    if (e) items = e.yn ? e.yn.map(r => ({ l: r.t, a: r.a === 'yes' ? 'Yes' : 'No' })) : e.sel ? e.sel.map(([l, a]) => ({ l, a })) : [{ l: '', a: e.t || '' }];
+  } else items = (q.opts || []).filter(o => q.ans.includes(o.k)).map(o => ({ l: '', a: o.t }));
+  answerCache.set(q.id, items);
+  return items;
+}
+const answerText = q => answerItems(q).map(x => `${x.l} ${x.a}`).join(' ').toLowerCase();
+const isYn = t => /^(yes|no)$/i.test(String(t).trim());
+function ynUnits(q) {
+  if (q.interaction) return q.interaction.rows.filter(r => r.options.length === 2 && r.options.every(o => isYn(o.text))).map(r => ({ t: r.label, a: (r.options.find(o => o.id === r.answer) || {}).text.toLowerCase() }));
+  if (q.self) { const e = ANSWER_INDEX[q.id]; return e && e.yn ? e.yn : [] }
+  if (q.opts && q.opts.length && q.opts.every(o => isYn(o.t))) return q.opts.filter(o => q.ans.includes(o.k)).map(o => ({ t: '', a: o.t.trim().toLowerCase() }));
+  return [];
+}
+const ynCache = new Map();
+const ynOf = q => { let u = ynCache.get(q.id); if (!u) { u = ynUnits(q); ynCache.set(q.id, u) } return u };
+const typeMatch = (q, type, yn) => type === 'all' || (type === 'yesno' ? (u => u.length > 0 && (yn === 'both' || u.some(x => x.a === yn)))(ynOf(q)) : type === questionType(q));
+function ynStats(list) {
+  const seen = new Set();
+  let y = 0, n = 0, qn = 0;
+  list.forEach(q => { const k = q.sourceId || q.id; if (seen.has(k)) return; const u = ynOf(q); if (!u.length) return; seen.add(k); qn++; u.forEach(x => x.a === 'yes' ? y++ : n++) });
+  return { y, n, q: qn };
+}
+function ynPanel(owner, list, onChange) {
+  const st = ynStats(list);
+  const radios = [['both', 'ynBoth'], ['yes', 'ynYes'], ['no', 'ynNo']].map(([v, k]) => el('label', { class: 'check' }, el('input', { type: 'radio', name: 'yn-' + (owner === cfg ? 's' : 'b'), value: v, checked: owner.yn === v, 'data-f': 'yn' + v, onchange: () => { owner.yn = v; onChange() } }), T(k)));
+  return el('div', { class: 'ynpanel' }, el('div', { class: 'label' }, T('ynFilter')), el('div', { class: 'row' }, radios), el('p', { class: 'sub ynstats' }, T('ynStats').replace('{y}', st.y).replace('{n}', st.n).replace('{q}', st.q)), el('p', { class: 'sub' }, T('ynNote')));
+}
+function answerTextNode(q) {
+  const items = q.interaction ? [] : answerItems(q);
+  if (!q.self || !items.length || !items.some(x => x.a)) return null;
+  return el('details', { class: 'anstext' }, el('summary', {}, T('ocrAnswer')),
+    el('ul', {}, items.map(x => el('li', {}, x.l ? el('span', {}, x.l + ' → ') : null, el('strong', {}, isYn(x.a) ? T(x.a.toLowerCase() === 'yes' ? 'ynYes' : 'ynNo') : x.a)))));
+}
 const isRight = (q, s) => {
   if (q.interaction) {
     if (isLegacySelfAnswer(q, s)) return s.has('OK');
@@ -231,7 +272,7 @@ function progressMap() {
   return { last, ok, ko, none: QUESTION_DATA.length - ok - ko };
 }
 const inScope = (scope, r) => scope === 'all' || (scope === 'failed' && r === false) || (scope === 'correct' && r === true) || (scope === 'answered' && r !== undefined) || (scope === 'none' && r === undefined);
-function pool() { const pm = progressMap(); return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && inScope(cfg.scope, pm.last.get(d.id)) && (cfg.type === 'all' || cfg.type === questionType(d))) }
+function pool() { const pm = progressMap(); return QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam)) && inScope(cfg.scope, pm.last.get(d.id)) && typeMatch(d, cfg.type, cfg.yn)) }
 
 function renderSetup() {
   const p = pool();
@@ -240,7 +281,7 @@ function renderSetup() {
   const nMcq = QUESTION_DATA.length - nSelf - nInteractive;
   const counts = [10, 25, 50, 100, 0].map(n => el('button', { class: 'chip', 'data-f': 'n' + n, 'aria-pressed': cfg.count === n, onclick: () => { cfg.count = n; refresh() } }, n === 0 ? T('all_') : String(n)));
   const modes = ['practice', 'exam'].map(m => el('button', { class: 'chip', 'data-f': 'm' + m, 'aria-pressed': cfg.mode === m, onclick: () => { cfg.mode = m; refresh() } }, T(m)));
-  const types = [['all', 'typeAll'], ['mcq', 'typeMcq'], ['self', 'typeSelf'], ['interactive', 'typeInteractive']].map(([v, k]) => el('button', { class: 'chip', 'data-f': 't' + v, 'aria-pressed': cfg.type === v, onclick: () => { cfg.type = v; refresh() } }, T(k)));
+  const types = [['all', 'typeAll'], ['mcq', 'typeMcq'], ['self', 'typeSelf'], ['interactive', 'typeInteractive'], ['yesno', 'typeYesNo']].map(([v, k]) => el('button', { class: 'chip', 'data-f': 't' + v, 'aria-pressed': cfg.type === v, onclick: () => { cfg.type = v; refresh() } }, T(k)));
   const pm = progressMap();
   const scopes = [['all', 'scopeAll', QUESTION_DATA.length], ['failed', 'scopeFailed', pm.ko], ['correct', 'scopeCorrect', pm.ok], ['answered', 'scopeAnswered', pm.ok + pm.ko], ['none', 'scopeNone', pm.none]].map(([v, k, n]) => el('button', { class: 'chip', 'data-f': 's' + v, 'aria-pressed': cfg.scope === v, onclick: () => { cfg.scope = v; refresh() } }, `${T(k)} (${n})`));
   const stat = (cls, n, label) => el('div', { class: 'stat ' + cls }, el('strong', {}, String(n)), el('span', {}, label));
@@ -256,7 +297,7 @@ function renderSetup() {
         window.EXAMS_V2_UNAVAILABLE ? el('p', { class: 'sub' }, T('v2Unavailable')) : null),
       el('div', {}, el('div', { class: 'label' }, T('progress')), el('div', { class: 'stats' }, stat('good', pm.ok, T('statCorrect')), stat('bad', pm.ko, T('statWrong')), stat('', pm.none, T('statNone'))), el('p', { class: 'sub', style: 'margin-top:6px' }, T('progressNote'))),
       el('div', {}, el('div', { class: 'label' }, T('scope')), el('div', { class: 'seg wrapseg', style: 'margin-top:8px' }, scopes)),
-      el('div', {}, el('div', { class: 'label' }, T('type')), el('div', { class: 'seg', style: 'margin-top:8px' }, types)),
+      el('div', {}, el('div', { class: 'label' }, T('type')), el('div', { class: 'seg', style: 'margin-top:8px' }, types), cfg.type === 'yesno' ? ynPanel(cfg, QUESTION_DATA.filter(d => cfg.sel.has(examKey(d.version, d.exam))), refresh) : null),
       el('div', {}, el('div', { class: 'label' }, T('count')), el('div', { class: 'seg', style: 'margin-top:8px' }, counts)),
       el('div', {}, el('div', { class: 'label' }, T('mode')), el('div', { class: 'seg', style: 'margin-top:8px' }, modes)),
       el('div', { class: 'row' }, cb('shuffle', T('shuffle'), 'c1'), cb('shuffleOpts', T('shuffleOpts'), 'c2')),
@@ -269,7 +310,7 @@ function start() {
   let p = pool(); if (cfg.shuffle) p = shuf(p); if (cfg.count && cfg.count < p.length) p = p.slice(0, cfg.count);
   const optsOrder = {};
   if (cfg.shuffleOpts) p.forEach(q => { if (q.opts && !q.opts.some(o => o.i)) optsOrder[q.id] = shuf(q.opts).map(o => o.k) });
-  const att = { id: uid(), startedAt: Date.now(), finishedAt: null, status: 'in-progress', mode: cfg.mode, type: cfg.type, sets: [...cfg.sel], onlyFailed: cfg.scope === 'failed', scope: cfg.scope, qids: p.map(q => q.id), opts: optsOrder, answers: {} };
+  const att = { id: uid(), startedAt: Date.now(), finishedAt: null, status: 'in-progress', mode: cfg.mode, type: cfg.type, yn: cfg.yn, sets: [...cfg.sel], onlyFailed: cfg.scope === 'failed', scope: cfg.scope, qids: p.map(q => q.id), opts: optsOrder, answers: {} };
   attempts.push(att); persist();
   beginRun(att, 0);
 }
@@ -689,18 +730,19 @@ function renderIO() {
 
 function bankMatches(q) {
   if (!bankState.exams.has(examKey(q.version, q.exam))) return false;
-  if (bankState.type !== 'all' && bankState.type !== questionType(q)) return false;
+  if (!typeMatch(q, bankState.type, bankState.yn)) return false;
   const s = bankState.q.trim().toLowerCase();
   if (!s) return true;
+  if (bankState.ansOnly) return answerText(q).includes(s);
   const interactive = q.interaction ? q.interaction.rows.flatMap(row => [row.label, ...row.options.map(option => option.text)]) : [];
-  const hay = q.stem.map(x => x.t || '').concat((q.opts || []).map(o => o.t), interactive).join(' ').toLowerCase();
+  const hay = q.stem.map(x => x.t || '').concat((q.opts || []).map(o => o.t), interactive, answerText(q)).join(' ').toLowerCase();
   return hay.includes(s);
 }
 function renderBank() {
   const list = QUESTION_DATA.filter(bankMatches);
   const shown = list.slice(0, bankState.limit);
   const onExamChange = () => { bankState.limit = 40; refresh() };
-  const types = [['all', 'typeAll'], ['mcq', 'typeMcq'], ['self', 'typeSelf'], ['interactive', 'typeInteractive']].map(([v, k]) => el('button', { class: 'chip', 'data-f': 'bt' + v, 'aria-pressed': bankState.type === v, onclick: () => { bankState.type = v; bankState.limit = 40; refresh() } }, T(k)));
+  const types = [['all', 'typeAll'], ['mcq', 'typeMcq'], ['self', 'typeSelf'], ['interactive', 'typeInteractive'], ['yesno', 'typeYesNo']].map(([v, k]) => el('button', { class: 'chip', 'data-f': 'bt' + v, 'aria-pressed': bankState.type === v, onclick: () => { bankState.type = v; bankState.limit = 40; refresh() } }, T(k)));
   const input = el('input', { type: 'text', id: 'bq', class: 'search', placeholder: T('search'), autocomplete: 'off', spellcheck: 'false' });
   input.value = bankState.q;
   input.addEventListener('input', () => { bankState.q = input.value; bankState.limit = 40; refresh() });
@@ -709,10 +751,12 @@ function renderBank() {
     el('div', { class: 'panel' },
       el('h2', {}, T('bankTitle')),
       input,
+      el('label', { class: 'check', for: 'bans' }, el('input', { type: 'checkbox', id: 'bans', checked: bankState.ansOnly, onchange: e => { bankState.ansOnly = e.target.checked; bankState.limit = 40; refresh() } }), T('searchAnswers')),
       versionGroup('1.0', V1_EXAMS, bankState.exams, 'be', onExamChange),
       versionGroup('2.0', V2_EXAMS, bankState.exams, 'be', onExamChange),
       window.EXAMS_V2_UNAVAILABLE ? el('p', { class: 'sub' }, T('v2Unavailable')) : null,
       el('div', { class: 'seg' }, types),
+      bankState.type === 'yesno' ? ynPanel(bankState, QUESTION_DATA.filter(q => bankState.exams.has(examKey(q.version, q.exam))), () => { bankState.limit = 40; refresh() }) : null,
       el('div', { class: 'sub mono' }, `${shown.length}/${list.length} ${T('shown')}`)),
     el('div', { class: 'panel' },
       el('div', { class: 'rev' }, shown.map(q => {
@@ -720,7 +764,7 @@ function renderBank() {
         return el('div', { class: 'item' },
           el('div', { class: 'tag' }, `${q.exam} · ${q.id}` + (q.multi ? ` · ${T('nAnswers', { n: q.ans.length })}` : '')),
           flagsNode(q), stemNode(q),
-          q.interaction ? interactionAnswerNode(q, new Set(q.interaction.rows.map(row => `${row.id}:${row.answer}`)), true, null, true) : q.self ? solutionNode(q) : optionsNode(keyOnly, new Set(q.ans), true),
+          q.interaction ? interactionAnswerNode(q, new Set(q.interaction.rows.map(row => `${row.id}:${row.answer}`)), true, null, true) : q.self ? [solutionNode(q), answerTextNode(q)] : optionsNode(keyOnly, new Set(q.ans), true),
           !q.interaction && !q.self && q.ex.length ? partsNode(q.ex) : null);
       })),
       list.length > shown.length ? el('div', { class: 'row' }, el('button', { class: 'btn ghost', id: 'more', onclick: () => { bankState.limit += 40; refresh() } }, `${T('showMore')} (${list.length - shown.length})`)) : null));
