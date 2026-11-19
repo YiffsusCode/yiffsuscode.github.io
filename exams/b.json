@@ -203,20 +203,19 @@
       "opts": [
         {
           "k": "A",
-          "t": "",
-          "missing": true
-        },
-        {
-          "k": "B",
           "t": "Navigate to Customize the System and export everything to a managed solution."
         },
         {
-          "k": "C",
+          "k": "B",
           "t": "Create packages for Package Deployer."
         },
         {
-          "k": "D",
+          "k": "C",
           "t": "Create customizations with metadata in Organization Services."
+        },
+        {
+          "k": "D",
+          "t": "Write a Web API to move customizations."
         }
       ],
       "ans": "B",
@@ -241,20 +240,19 @@
       "opts": [
         {
           "k": "A",
-          "t": "",
-          "missing": true
-        },
-        {
-          "k": "B",
           "t": "Recreate customizations in a new environment."
         },
         {
-          "k": "C",
+          "k": "B",
           "t": "Create packages for Package Deployer."
         },
         {
-          "k": "D",
+          "k": "C",
           "t": "Create customizations with metadata in Organization Services."
+        },
+        {
+          "k": "D",
+          "t": "Clone the solution."
         }
       ],
       "ans": "B",
@@ -279,20 +277,19 @@
       "opts": [
         {
           "k": "A",
-          "t": "",
-          "missing": true
-        },
-        {
-          "k": "B",
           "t": "Clone the solution."
         },
         {
-          "k": "C",
+          "k": "B",
           "t": "Create packages for Package Deployer."
         },
         {
-          "k": "D",
+          "k": "C",
           "t": "Recreate customizations in a new environment."
+        },
+        {
+          "k": "D",
+          "t": "Navigate to Customize the System and export everything to a managed solution."
         }
       ],
       "ans": "B",
@@ -956,20 +953,19 @@
       "opts": [
         {
           "k": "A",
-          "t": "",
-          "missing": true
-        },
-        {
-          "k": "B",
           "t": "Power App Component Framework (PCF) control"
         },
         {
-          "k": "C",
+          "k": "B",
           "t": "view"
         },
         {
-          "k": "D",
+          "k": "C",
           "t": "component library"
+        },
+        {
+          "k": "D",
+          "t": "form"
         }
       ],
       "ans": "C",
@@ -977,6 +973,46 @@
       "id": "v2-B-17",
       "caseFix": true,
       "sourceId": "B-17",
+      "version": "2.0"
+    },
+    {
+      "exam": "B",
+      "n": 18,
+      "stem": [
+        {
+          "t": "This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided. To answer the questions included in a case study, you will need to reference information that is provided in the case study. Case studies might contain exhibits and other resources that provide more information about the scenario that is described in the case study. Each question is independent of the other questions in this case study. At the end of this case study, a review screen will appear. This screen allows you to review your answers and to make changes before you move to the next section of the exam. After you begin a new section, you cannot return to this section. To start the case study - To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. If the case study has an All Information tab, note that the information displayed is identical to the information displayed on the subsequent tabs. When you are ready to answer a question, click the Question button to return to the question. Background - City Power & Light is an energy and utilities company that has offices in Europe. The company subsidizes home improvements for domestic customers, to improve energy efficiency and to meet environmental commitments. The company also distributes and generates electricity for domestic and commercial customers. The company has 2,000 employees in multiple offices and in work-from-home locations. City Power & Light uses a team of schedulers, assessors, field engineers, and customer support agents for home improvements in a program named Get Energy Fit. Current Environment - Get Energy Fit Program - City Power & Light uses the following to manage the Get Energy Fit program: • The company uses a Microsoft Excel spreadsheet named Planning Hub on Microsoft SharePoint Online to store information about customer appointments, customer details, and customer eligibility in the program. • The company records sensitive customer information that includes the document identification numbers and the customer's financial information. • The company uses an assessor to verify customer eligibility in the program and to perform a suitability assessment. The assessor completes the suitability assessment by using a paper and clipboard at the customer property and enters the data to the Planning Hub after the assessment is completed. The assessor also uploads photographs to an on-premises document library. The assessor completes the eligibility assessment by using an application written in React. • Schedulers use Microsoft Outlook to schedule engineers and assessors for home improvement appointments. About 200 appointments are scheduled daily. • Employees for the company submit funding claims on behalf of the customer by uploading evidence and compliance checks information to an application named the Claim Submission Portal. Technical Environment - • Schedulers use Windows 11 desktop and laptop computers with the latest version of Microsoft Edge. • Assessors use iOS and Android tablet devices. • The Claim Submission Portal uses REST-based APIs for all operations and a dedicated testing environment. Authentication to the API is provided by using the following example header key and value pair: o Authentication: 2C8D41431415E429C7FC7A74D8315 • The company uses Microsoft Azure for hosting multiple applications. Requirements - Overview - City Power & Light plans to implement Microsoft Power Platform to improve the customer experience and increase delivery for the Get Energy Fit program. Business Requirements - • Only team leaders and senior managers should have access to read personally identifiable information (PII). • All development changes must be tested in a separate environment. • The company requires out-of-the-box solutions, when possible. • Sensitive credentials, such as user passwords and API secrets, must be stored securely. • The Claim Submission Portal must allow citizen developers to create automated solutions. • Customer and appointment information must be accessible to all applications. Planning Hub Application - The company is planning to replace the Planning Hub spreadsheet with a new application. The new application has the following requirements: • The application must support a component design that provides rapid changes requested by the schedulers. • The data model for the application must capture the following information: o Information about customers such as name, address, and other PII. o The data and time for an assessor's or engineer's appointment. Schedulers must be able to view all appointments without filters. o Records the details of the home improvements installed for the customer. o Contains all the information and evidence for submission to the Claim Submission Portal. • After an assessor uploads the funding application and all evidence after a home improvement has been complete, the company requires that the status of the application is set to Submit and should run the following: o Retrieve the details about the customer and the improvement installed. o Send an approval to a senior manager to review and approve in Microsoft Teams. o Upload the information to the API endpoint. o If the upload fails to complete, it should retry after a delay of 30 seconds up to three times. If an error occurs after three times, the application should send an email notification to the application support team. o Must record the status on the funding application. Suitability Assessment Tool - The company plans to implement a new application named the Suitability Assessment Tool for the assessors. The new application has the following requirements: • Must integrate with Microsoft Power Platform. • Assessors must be able to complete the eligibility assessment by using the Suitability Assessment Tool. The assessors must be able to upload photographs to the on-premises file share. • Must be developed by using modular components that can be used by other applications. • Must be optimized for use on tablet devices. • All changes to the application must be completed in the Suitability Assessment Tool solution. Reporting - The company has the following requirements for a reporting solution: • The data source for the reporting solution must support incremental refreshes. • The solution must report accurate data if an error occurs. Issues - • A recent audit identified that all users can access the PII in the Planning Hub spreadsheet. • After a developer deploys a change to the production environment, a user reports information is loaded incorrectly to the test system when processing a funding application. • After deploying a change to the new eligibility assessment tool in the development environment, you observe that the changes do not appear in the development environment. • After removing a column from the Planning Hub application and deploying the changes to the production environment, you observe that the column is still present. • You deploy the customizations for the data model. Users report that the email address of the user who created the appointment is missing and that searches on the description information do not return any results."
+        },
+        {
+          "t": "You need to identify the Azure service to use for the Planning Hub application."
+        },
+        {
+          "t": "Which service should you use?"
+        }
+      ],
+      "ex": [],
+      "opts": [
+        {
+          "k": "A",
+          "t": "Logic App"
+        },
+        {
+          "k": "B",
+          "t": "Service Bus"
+        },
+        {
+          "k": "C",
+          "t": "Key Vault"
+        },
+        {
+          "k": "D",
+          "t": "Function"
+        }
+      ],
+      "ans": "A",
+      "multi": false,
+      "id": "v2-B-18",
+      "caseFix": true,
+      "sourceId": "B-18",
       "version": "2.0"
     },
     {
